@@ -1,0 +1,36 @@
+{
+	"company": {
+		"name": "Shadow Forge",
+		"motto": "Where great code is forged.",
+		"type": "We do software.",
+		"linkURL": "/learnMore.html",
+		"contactInformation": {
+			"email": "j@shadowforge.dev",
+			"phone": "+1",
+			"address": "Smyrna, GA, USA"
+		}
+	},
+	"employees": {
+		"count": 2,
+		"details": [
+			{
+				"title": "Founder",
+				"name": "JPK",
+				"startDate": "2023-02-01",
+				"role": "Lead Developer",
+				"contactInformation": {
+					"email": "j@shadowforge.dev"
+				}
+			},
+			{
+				"title": "Technical Lead",
+				"name": "WMM",
+				"startDate": "TBD",
+				"role": "Developer",
+				"contactInformation": {
+					"email": "[@]"
+				}
+			}
+		]
+	}
+}

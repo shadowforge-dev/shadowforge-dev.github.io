@@ -1,9 +1,46 @@
-.________.___.__  .______  .______  ._______           ___      ._______._______  .______  ._____  ._______
-|    ___/:   |  \ :      \ :_ _   \ : .___  \ .___    |   |     :_ ____/: .___  \ : __   \ :_ ___\ : .____/
-|___    \|   :   ||   .   ||   |   || :   |  |:   | /\|   |     |   _/  | :   |  ||  \____||   |___| : _/\ 
-|       /|   .   ||   :   || . |   ||     :  ||   |/  :   |     |   |   |     :  ||   :  \ |   /  ||   /  \
-|__:___/ |___|   ||___|   ||. ____/  \_. ___/ |   /       |     |_. |    \_. ___/ |   |___\|. __  ||_.: __/
-   :         |___|    |___| :/         :/     |______/|___|       :/       :/     |___|     :/ |. |   :/   
-                            :          :              :           :        :                :   :/         
-                                                      :                                         :          
-                                                                                                           
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>shadowforge.dev</title>
+   <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+   <pre class="title-header">
+      ▄▄▄▄▄    ▄  █ ██   ██▄   ████▄   ▄ ▄       ▄████  ████▄ █▄▄▄▄   ▄▀  ▄███▄   
+     █     ▀▄ █   █ █ █  █  █  █   █  █   █      █▀   ▀ █   █ █  ▄▀ ▄▀    █▀   ▀  
+   ▄  ▀▀▀▀▄   ██▀▀█ █▄▄█ █   █ █   █ █ ▄   █     █▀▀    █   █ █▀▀▌  █ ▀▄  ██▄▄    
+    ▀▄▄▄▄▀    █   █ █  █ █  █  ▀████ █  █  █     █      ▀████ █  █  █   █ █▄   ▄▀ 
+                 █     █ ███▀         █ █ █       █             █    ███  ▀███▀   
+                ▀     █                ▀ ▀         ▀           ▀                  
+                                                                                                                                    
+   </pre>
+   <div id="content-container">
+      <div id="menu-container">
+         <a href="/learnMore.html" class="menu-option" data-url="/learnMore.html" onclick="loadInternalContent(event, '/learnMore.html')">Learn More</a> -
+         <a href="/portfolio.html" class="menu-option" data-url="/portfolio.html" onclick="loadInternalContent(event, '/portfolio.html')">Portfolio</a> -
+         <a href="/about.html" class="menu-option" data-url="/about.html" onclick="loadInternalContent(event, '/about.html')">About</a>
+      </div>
+      <button id="close-btn"><i class="fas fa-times"></i></button>
+      <div id="content-inner"></div>
+   </div>
+
+   <pre id="json-container"></pre>
+   <script src="script.js"></script>
+   <script>
+      // Fetch JSON data and stylize
+      fetch('/data.json')
+         .then(response => response.json())
+         .then(data => stylizeJSON(data))
+         .catch(error => {
+            console.error('Error loading JSON:', error);
+            showErrorBanner('Failed to load data. Please try again later.');
+         });
+   </script>
+</body>
+
+</html>
