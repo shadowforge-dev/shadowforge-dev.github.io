@@ -1,5 +1,7 @@
 name: shadowforge.dev build-test-deploy
+
 on: [push, pull_request]
+
 jobs:
   build:
 	runs-on: ubuntu-latest
@@ -12,6 +14,7 @@ jobs:
 		  node-version: 18.x
 	  - run: npm install
 	  - run: npm run build
+
   test:
 	needs: build
 	runs-on: ubuntu-latest
