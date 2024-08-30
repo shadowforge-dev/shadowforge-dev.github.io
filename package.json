@@ -1,0 +1,19 @@
+{
+  "name": "shadowforge-dev.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.test.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  },
+  "jest": {
+    "verbose": true
+  },
+  "keywords": [],
+  "author": "JPK",
+  "license": "ISC"
+}
