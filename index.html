@@ -10,28 +10,13 @@
 </head>
 
 <body>
-   <pre class="title-header">
-      ▄▄▄▄▄    ▄  █ ██   ██▄   ████▄   ▄ ▄       ▄████  ████▄ █▄▄▄▄   ▄▀  ▄███▄   
-     █     ▀▄ █   █ █ █  █  █  █   █  █   █      █▀   ▀ █   █ █  ▄▀ ▄▀    █▀   ▀  
-   ▄  ▀▀▀▀▄   ██▀▀█ █▄▄█ █   █ █   █ █ ▄   █     █▀▀    █   █ █▀▀▌  █ ▀▄  ██▄▄    
-    ▀▄▄▄▄▀    █   █ █  █ █  █  ▀████ █  █  █     █      ▀████ █  █  █   █ █▄   ▄▀ 
-                 █     █ ███▀         █ █ █       █             █    ███  ▀███▀   
-                ▀     █                ▀ ▀         ▀           ▀                  
-                                                                                                                                    
-   </pre>
-   <div id="content-container">
-      <div id="menu-container">
-         <a href="/learnMore.html" class="menu-option" data-url="/learnMore.html" onclick="loadInternalContent(event, '/learnMore.html')">Learn More</a> -
-         <a href="/portfolio.html" class="menu-option" data-url="/portfolio.html" onclick="loadInternalContent(event, '/portfolio.html')">Portfolio</a> -
-         <a href="/about.html" class="menu-option" data-url="/about.html" onclick="loadInternalContent(event, '/about.html')">About</a>
-      </div>
-      <button id="close-btn"><i class="fas fa-times"></i></button>
-      <div id="content-inner"></div>
-   </div>
-
+   <pre id="title-header" class="title-header"></pre>
    <pre id="json-container"></pre>
    <script src="script.js"></script>
    <script>
+      // Initialize random ASCII art
+      setRandomAsciiArt();
+
       // Fetch JSON data and stylize
       fetch('/data.json')
          .then(response => response.json())

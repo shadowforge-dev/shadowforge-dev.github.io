@@ -1,102 +1,231 @@
-  function stylizeJSON(json) {
-  	const jsonContainer = document.getElementById('json-container');
+const asciiArts = {
 
-  	// Function to replace URLs and emails with links
-  	function replaceMarkdownLinks(text, key) {
-  		if (key && key.toLowerCase().includes('url')) {
-  			if (text.startsWith('/')) {
-  				// Internal link
-  				return `<a href="${text}" class="json-link" onclick="loadInternalContent(event, '${text}')">${text}</a>`;
-  			} else {
-  				// External link
-  				return `<a href="${text}" class="json-link" target="_blank">${text}</a>`;
-  			}
-  		} else if (key && key.toLowerCase().includes('email')) {
-  			let url = text.startsWith('mailto:') ? text : `mailto:${text}`;
-  			return `<a href="${url}" class="json-link">${text}</a>`;
-  		}
-  		return text;
-  	}
+// BlurVision
+"BlurVision": `
+   ▄▄▄▄▄    ▄  █ ██   ██▄   ████▄   ▄ ▄       ▄████  ████▄ █▄▄▄▄   ▄▀  ▄███▄   
+  █     ▀▄ █   █ █ █  █  █  █   █  █   █      █▀   ▀ █   █ █  ▄▀ ▄▀    █▀   ▀  
+▄  ▀▀▀▀▄   ██▀▀█ █▄▄█ █   █ █   █ █ ▄   █     █▀▀    █   █ █▀▀▌  █ ▀▄  ██▄▄    
+ ▀▄▄▄▄▀    █   █ █  █ █  █  ▀████ █  █  █     █      ▀████ █  █  █   █ █▄   ▄▀ 
+              █     █ ███▀         █ █ █       █             █    ███  ▀███▀   
+             ▀     █                ▀ ▀         ▀           ▀                  
+`,
 
-  	// Recursive function to traverse the object and replace links
-  	function traverseAndReplace(obj) {
-  		if (typeof obj === 'object') {
-  			for (const key in obj) {
-  				if (typeof obj[key] === 'string') {
-  					obj[key] = replaceMarkdownLinks(obj[key], key);
-  				} else if (typeof obj[key] === 'object') {
-  					traverseAndReplace(obj[key]);
-  				}
-  			}
-  		}
-  	}
+// Fraktur
+"Fraktur": `
+       ...                                    ..                                             .....                                                          
+   .x888888hx    :   .uef^"                 dF                       x=~                  .H8888888x.  '\`+                                                  
+  d88888888888hxx  :d88E                   '88bu.             u.    88x.   .e.   .e.     :888888888888x.  !        u.      .u    .                          
+ 8" ... \`"*8888%\`  \`888E             u     '*88888bu    ...ue888b  '8888X.x888:.x888     8~    \`"*88888888"  ...ue888b   .d88B :@8c       uL          .u    
+!  "   \` .xnxx.     888E .z8k     us888u.    ^"*8888N   888R Y888r  \`8888  888X '888k    !      .  \`f""""    888R Y888r ="8888f8888r  .ue888Nc..   ud8888.  
+X X   .H8888888%:   888E~?888L .@88 "8888"  beWE "888L  888R I888>   X888  888X  888X     ~:...-\` :8L <)88:  888R I888>   4888>'88"  d88E\`"888E\` :888'8888. 
+X 'hn8888888*"   >  888E  888E 9888  9888   888E  888E  888R I888>   X888  888X  888X        .   :888:>X88!  888R I888>   4888> '    888E  888E  d888 '88%" 
+X: \`*88888%\`     !  888E  888E 9888  9888   888E  888E  888R I888>   X888  888X  888X     :~"88x 48888X ^\`   888R I888>   4888>      888E  888E  8888.+"    
+'8h.. \`\`     ..x8>  888E  888E 9888  9888   888E  888F u8888cJ888   .X888  888X. 888~    <  :888k'88888X    u8888cJ888   .d888L .+   888E  888E  8888L      
+ \`88888888888888f   888E  888E 9888  9888  .888N..888   "*888*P"    \`%88%\`\`"*888Y"         d8888f '88888X    "*888*P"    ^"8888*"    888& .888E  '8888c. .+ 
+  '%8888888888*"   m888N= 888> "888*""888"  \`"888*""      'Y"         \`~     \`"           :8888!    ?8888>     'Y"          "Y"      *888" 888&   "88888%   
+     ^"****""\`      \`Y"   888   ^Y"   ^Y'      ""                                         X888!      8888~                            \`"   "888E    "YP'    
+                         J88"                                                             '888       X88f                            .dWi   \`88E            
+                         @%                                                                '%8:     .8*"                             4888~  J8%             
+                       :"                                                                     ^----~\`                                ^"===*"\`              
+`,
 
-  	traverseAndReplace(json);
+// Poison
+"Poison": `
+ @@@@@@   @@@  @@@   @@@@@@   @@@@@@@    @@@@@@   @@@  @@@  @@@     @@@@@@@@   @@@@@@   @@@@@@@    @@@@@@@@  @@@@@@@@  
+@@@@@@@   @@@  @@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@  @@@  @@@     @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@@  @@@@@@@@  
+!@@       @@!  @@@  @@!  @@@  @@!  @@@  @@!  @@@  @@!  @@!  @@!     @@!       @@!  @@@  @@!  @@@  !@@        @@!       
+!@!       !@!  @!@  !@!  @!@  !@!  @!@  !@!  @!@  !@!  !@!  !@!     !@!       !@!  @!@  !@!  @!@  !@!        !@!       
+!!@@!!    @!@!@!@!  @!@!@!@!  @!@  !@!  @!@  !@!  @!!  !!@  @!@     @!!!:!    @!@  !@!  @!@!!@!   !@! @!@!@  @!!!:!    
+ !!@!!!   !!!@!!!!  !!!@!!!!  !@!  !!!  !@!  !!!  !@!  !!!  !@!     !!!!!:    !@!  !!!  !!@!@!    !!! !!@!!  !!!!!:    
+     !:!  !!:  !!!  !!:  !!!  !!:  !!!  !!:  !!!  !!:  !!:  !!:     !!:       !!:  !!!  !!: :!!   :!!   !!:  !!:       
+    !:!   :!:  !:!  :!:  !:!  :!:  !:!  :!:  !:!  :!:  :!:  :!:     :!:       :!:  !:!  :!:  !:!  :!:   !::  :!:       
+:::: ::   ::   :::  ::   :::   :::: ::  ::::: ::   :::: :: :::       ::       ::::: ::  ::   :::   ::: ::::   :: ::::  
+:: : :     :   : :   :   : :  :: :  :    : :  :     :: :  : :        :         : :  :    :   : :   :: :: :   : :: ::   
+`,
 
-  	// Convert JSON object to styled HTML
-  	function jsonToHtml(obj) {
-  		if (typeof obj === 'object') {
-  			let html = '<ul class="json-list">';
-  			for (const key in obj) {
-  				html += `<li class="json-item"><strong class="json-key">${key}<span class="colon">:</span></strong> `;
-  				if (typeof obj[key] === 'object') {
-  					html += jsonToHtml(obj[key]);
-  				} else {
-  					html += `<span class="json-value">${obj[key]}</span>`;
-  				}
-  				html += '</li>';
-  			}
-  			html += '</ul>';
-  			return html;
-  		}
-  		return obj;
-  	}
+// DiamFont
+"DiamFont": `
+ ▗▄▄▖▐▌▗▞▀▜▌ ▐▌ ▄▄▄  ▄   ▄     ▗▄▄▄▖ ▄▄▄   ▄▄▄  ▗▞▀▚▖
+▐▌   ▐▌▝▚▄▟▌ ▐▌█   █ █ ▄ █     ▐▌   █   █ █     ▐▛▀▀▘
+ ▝▀▚▖▐▛▀▚▖▗▞▀▜▌▀▄▄▄▀ █▄█▄█     ▐▛▀▀▘▀▄▄▄▀ █     ▝▚▄▄▖
+▗▄▄▞▘▐▌ ▐▌▝▚▄▟▌                ▐▌             ▗▄▖    
+                                             ▐▌ ▐▌   
+                                              ▝▀▜▌   
+                                             ▐▙▄▞▘   
+`,
 
-  	jsonContainer.innerHTML = jsonToHtml(json);
-  	setupEventListeners();
-  }
+// Patorjk's Cheese
+"PatorjksCheese": `
+         ______   ____   ____        ____        _____           _____      _____                       _____         _____         _____         _____         ______   
+     ___|\\     \\ |    | |    |  ____|\\   \\   ___|\\    \\     ____|\\    \\    |\\    \\   _____         ____|\\    \\   ____|\\    \\    ___|\\    \\    ___|\\    \\    ___|\\     \\  
+    |    |\\     \\|    | |    | /    /\\    \\ |    |\\    \\   /     /\\    \\   | |    | /    /|       |    | \\    \\ /     /\\    \\  |    |\\    \\  /    /\\    \\  |     \\     \\ 
+    |    |/____/||    |_|    ||    |  |    ||    | |    | /     /  \\    \\  \\/     / |    ||       |    |______//     /  \\    \\ |    | |    ||    |  |____| |     ,_____/|
+ ___|    \\|   | ||    .-.    ||    |__|    ||    | |    ||     |    |    | /     /_  \\   \\/       |    |----'\\|     |    |    ||    |/____/ |    |    ____ |     \\--'\\_|/
+|    \\    \\___|/ |    | |    ||    .--.    ||    | |    ||     |    |    ||     // \\  \\   \\       |    |_____/|     |    |    ||    |\\    \\ |    |   |    ||     /___/|  
+|    |\\     \\    |    | |    ||    |  |    ||    | |    ||\\     \\  /    /||    |/   \\ |    |      |    |      |\\     \\  /    /||    | |    ||    |   |_,  ||     \\____|\\
+|\\ ___\\|_____|   |____| |____||____|  |____||____|/____/|| \\_____\\/____/ ||\\ ___/\\   \\|   /|      |____|      | \\_____\\/____/ ||____| |____|\\\\ ___\\___/  /||____ '     /|
+| |    |     |   |    | |    ||    |  |    ||    /    | | \\ |    ||    | /| |   | \\______/ |      |    |       \\ |    ||    | /|    | |    || |   /____ / ||    /_____/ |
+ \\|____|_____|   |____| |____||____|  |____||____|____|/   \\|____||____|/  \\|___|/\\ |    | |      |____|        \\|____||____|/ |____| |____| \\|___|    | / |____|     | /
+    \\(    )/       \\(     )/    \\(      )/    \\(    )/        \\(    )/        \\(   \\|____|/         )/             \\(    )/      \\(     )/     \\( |____|/    \\( |_____|/ 
+     '    '         '     '      '      '      '    '          '    '          '      )/            '               '    '        '     '       '   )/        '    )/    
+`,
 
-  function loadInternalContent(event, url) {
-  	event.preventDefault();
-  	fetch(url)
-  		.then(response => response.text())
-  		.then(html => {
-  			const contentContainer = document.getElementById('content-inner');
-  			contentContainer.innerHTML = html;
-  			document.getElementById('content-container').style.display = 'block';
-  		})
-  		.catch(error => {
-  			console.error('Error loading internal content:', error);
-  			showErrorBanner('Failed to load content. Please try again later.');
-  		});
-  }
+// Bloody
+"Bloody": `
+  ██████  ██░ ██  ▄▄▄      ▓█████▄  ▒█████   █     █░     █████▒▒█████   ██▀███    ▄████ ▓█████ 
+▒██    ▒ ▓██░ ██▒▒████▄    ▒██▀ ██▌▒██▒  ██▒▓█░ █ ░█░   ▓██   ▒▒██▒  ██▒▓██ ▒ ██▒ ██▒ ▀█▒▓█   ▀ 
+░ ▓██▄   ▒██▀▀██░▒██  ▀█▄  ░██   █▌▒██░  ██▒▒█░ █ ░█    ▒████ ░▒██░  ██▒▓██ ░▄█ ▒▒██░▄▄▄░▒███   
+  ▒   ██▒░▓█ ░██ ░██▄▄▄▄██ ░▓█▄   ▌▒██   ██░░█░ █ ░█    ░▓█▒  ░▒██   ██░▒██▀▀█▄  ░▓█  ██▓▒▓█  ▄ 
+▒██████▒▒░▓█▒░██▓ ▓█   ▓██▒░▒████▓ ░ ████▓▒░░░██▒██▓    ░▒█░   ░ ████▓▒░░██▓ ▒██▒░▒▓███▀▒░▒████▒
+▒ ▒▓▒ ▒ ░ ▒ ░░▒░▒ ▒▒   ▓▒█░ ▒▒▓  ▒ ░ ▒░▒░▒░ ░ ▓░▒ ▒      ▒ ░   ░ ▒░▒░▒░ ░ ▒▓ ░▒▓░ ░▒   ▒ ░░ ▒░ ░
+░ ░▒  ░ ░ ▒ ░▒░ ░  ▒   ▒▒ ░ ░ ▒  ▒   ░ ▒ ▒░   ▒ ░ ░      ░       ░ ▒ ▒░   ░▒ ░ ▒░  ░   ░  ░ ░  ░
+░  ░  ░   ░  ░░ ░  ░   ▒    ░ ░  ░ ░ ░ ░ ▒    ░   ░      ░ ░   ░ ░ ░ ▒    ░░   ░ ░ ░   ░    ░   
+      ░   ░  ░  ░      ░  ░   ░        ░ ░      ░                  ░ ░     ░           ░    ░  ░
+`,
 
-  function setupEventListeners() {
-  	const closeButton = document.getElementById('close-btn');
-  	if (closeButton) {
-  		closeButton.onclick = function() {
-  			document.getElementById('content-container').style.display = 'none';
-  		};
-  	}
-  }
+// Elite
+"Elite": `
+.▄▄ ·  ▄ .▄ ▄▄▄· ·▄▄▄▄        ▄▄▌ ▐ ▄▌    ·▄▄▄      ▄▄▄   ▄▄ • ▄▄▄ .
+▐█ ▀. ██▪▐█▐█ ▀█ ██▪ ██ ▪     ██· █▌▐█    ▐▄▄·▪     ▀▄ █·▐█ ▀ ▪▀▄.▀·
+▄▀▀▀█▄██▀▐█▄█▀▀█ ▐█· ▐█▌ ▄█▀▄ ██▪▐█▐▐▌    ██▪  ▄█▀▄ ▐▀▀▄ ▄█ ▀█▄▐▀▀▪▄
+▐█▄▪▐███▌▐▀▐█ ▪▐▌██. ██ ▐█▌.▐▌▐█▌██▐█▌    ██▌.▐█▌.▐▌▐█•█▌▐█▄▪▐█▐█▄▄▌
+ ▀▀▀▀ ▀▀▀ · ▀  ▀ ▀▀▀▀▀•  ▀█▄▀▪ ▀▀▀▀ ▀▪    ▀▀▀  ▀█▄▀▪.▀  ▀·▀▀▀▀  ▀▀▀ 
+`,
 
-  function showErrorBanner(message) {
-  	const banner = document.createElement('div');
-  	banner.className = 'error-banner';
-  	banner.textContent = message;
+// Cosmike2
+"Cosmike2": `
+ .::::::. ::                       ::                      .-:::::'                                 
+;;;'    ' ;;;                      ;;;                     ;;;''''                                  
+'[==/[[[[,[[[[cc,,.  ,ccc,    ,c[[[cc, ,ccc,'[[, [[, [['   [[[,,== ,ccc,  =,,[[== ,ccc,   ,cc[[[cc. 
+  '''    $$$$"""$$$ $$$cc$$$ $$""""Y$$$$$"c$$$Y$ $$$ $P    \`$$$"\`\`$$$"c$$$\`$$$"\`\`$$$cc$$$ $$$___--' 
+ 88b    dP888   "88o888   88888o,,od8P888   88 "88"888      888   888   88 888   888   88888b    ,o,
+  "YMmMY" MMM    YMM "YUM" MP"YUMMMP"  "YUMMP   "M "M"      "MM,   "YUMMP  "MM,   "YUM" MP "YUMMMMP"
+                                                                                       MMM          
+                                                                                 ,c.   ###          
+                                                                                 \\M###MMU          
+`,
 
-  	document.body.appendChild(banner);
+// O8
+"O8": `
+ oooooooo8 oooo                         oooo                              ooooooooooo                                             
+888         888ooooo    ooooooo    ooooo888   ooooooo  oooo  o  oooo       888    88 ooooooo  oo oooooo     oooooooo8 ooooooooo8 
+ 888oooooo  888   888   ooooo888 888    888 888     888 888 888 888        888ooo8 888     888 888    888 888    88o 888oooooo8  
+        888 888   888 888    888 888    888 888     888  888888888         888     888     888 888         888oo888o 888         
+o88oooo888 o888o o888o 88ooo88 8o  88ooo888o  88ooo88     88   88         o888o      88ooo88  o888o       888     888  88oooo888 
+`,
 
-  	// Trigger the drop-down animation
-  	setTimeout(() => banner.classList.add('show'), 10);
+// Slant Relief
+"SlantRelief": String.raw`
+_____/\\\\\\\\\\\____/\\\________________________________/\\\_____________________________________________/\\\\\\\\\\\\\\\_________________________________________________________
+ ___/\\\/////////\\\_\/\\\_______________________________\/\\\____________________________________________\/\\\///////////__________________________________________________________
+  __\//\\\______\///__\/\\\_______________________________\/\\\____________________________________________\/\\\___________________________________________/\\\\\\\\_________________
+   ___\////\\\_________\/\\\__________/\\\\\\\\\___________\/\\\______/\\\\\_____/\\____/\\___/\\___________\/\\\\\\\\\\\_________/\\\\\_____/\\/\\\\\\\___/\\\////\\\_____/\\\\\\\\__
+    ______\////\\\______\/\\\\\\\\\\__\////////\\\_____/\\\\\\\\\____/\\\///\\\__\/\\\__/\\\\_/\\\___________\/\\\///////________/\\\///\\\__\/\\\/////\\\_\//\\\\\\\\\___/\\\/////\\\_
+     _________\////\\\___\/\\\/////\\\___/\\\\\\\\\\___/\\\////\\\___/\\\__\//\\\_\//\\\/\\\\\/\\\____________\/\\\______________/\\\__\//\\\_\/\\\___\///___\///////\\\__/\\\\\\\\\\\__
+      __/\\\______\//\\\__\/\\\___\/\\\__/\\\/////\\\__\/\\\__\/\\\__\//\\\__/\\\___\//\\\\\/\\\\\_____________\/\\\_____________\//\\\__/\\\__\/\\\__________/\\_____\\\_\//\\///////___
+       _\///\\\\\\\\\\\/___\/\\\___\/\\\_\//\\\\\\\\/\\_\//\\\\\\\/\\__\///\\\\\/_____\//\\\\//\\\______________\/\\\______________\///\\\\\/___\/\\\_________\//\\\\\\\\___\//\\\\\\\\\\_
+        ___\///////////_____\///____\///___\////////\//___\///////\//_____\/////________\///__\///_______________\///_________________\/////_____\///___________\////////_____\//////////__
+`,
 
-  	// Retract the banner after 5 seconds
-  	setTimeout(() => {
-  		banner.classList.remove('show');
-  		banner.addEventListener('transitionend', () => {
-  			document.body.removeChild(banner);
-  		}, { once: true });
-  	}, 5000);
-  }
+// Peaks Slant
+"PeaksSlant": String.raw`
+     ___/\/\/\/\/\__/\/\__________________________/\/\__________________________________/\/\/\/\/\/\_________________________________________________
+    _/\/\__________/\/\________/\/\/\____________/\/\____/\/\/\____/\/\______/\/\______/\/\____________/\/\/\____/\/\__/\/\____/\/\/\/\____/\/\/\___
+   ___/\/\/\/\____/\/\/\/\________/\/\______/\/\/\/\__/\/\__/\/\__/\/\__/\__/\/\______/\/\/\/\/\____/\/\__/\/\__/\/\/\/\____/\/\__/\/\__/\/\/\/\/\_
+  _________/\/\__/\/\__/\/\__/\/\/\/\____/\/\__/\/\__/\/\__/\/\__/\/\/\/\/\/\/\______/\/\__________/\/\__/\/\__/\/\__________/\/\/\/\__/\/\_______
+ _/\/\/\/\/\____/\/\__/\/\__/\/\/\/\/\____/\/\/\/\____/\/\/\______/\/\__/\/\________/\/\____________/\/\/\____/\/\______________/\/\____/\/\/\/\_
+_________________________________________________________________________________________________________________________/\/\/\/\_______________
+`,
 
-module.exports = { stylizeJSON, loadInternalContent, showErrorBanner, setupEventListeners };
+};
+
+function setRandomAsciiArt() {
+	const titleHeader = document.getElementById('title-header');
+	if (titleHeader) {
+		const artNames = Object.keys(asciiArts);
+		const randomName = artNames[Math.floor(Math.random() * artNames.length)];
+		const randomArt = asciiArts[randomName];
+		titleHeader.textContent = randomArt.replace(/^\n+/, '').replace(/\n+$/, '');
+	}
+}
+
+function stylizeJSON(json) {
+	const jsonContainer = document.getElementById('json-container');
+
+	// Function to replace URLs and emails with links
+	function replaceMarkdownLinks(text, key) {
+		if (key && key.toLowerCase().includes('url')) {
+			if (text.startsWith('/')) {
+				// Internal link (popup removed, so just standard link if needed)
+				return `<a href="${text}" class="json-link">${text}</a>`;
+			} else {
+				// External link
+				return `<a href="${text}" class="json-link" target="_blank">${text}</a>`;
+			}
+		} else if (key && key.toLowerCase().includes('email')) {
+			let url = text.startsWith('mailto:') ? text : `mailto:${text}`;
+			return `<a href="${url}" class="json-link">${text}</a>`;
+		}
+		return text;
+	}
+
+	// Recursive function to traverse the object and replace links
+	function traverseAndReplace(obj) {
+		if (typeof obj === 'object') {
+			for (const key in obj) {
+				if (typeof obj[key] === 'string') {
+					obj[key] = replaceMarkdownLinks(obj[key], key);
+				} else if (typeof obj[key] === 'object') {
+					traverseAndReplace(obj[key]);
+				}
+			}
+		}
+	}
+
+	traverseAndReplace(json);
+
+	// Convert JSON object to styled HTML
+	function jsonToHtml(obj) {
+		if (typeof obj === 'object') {
+			let html = '<ul class="json-list">';
+			for (const key in obj) {
+				html += `<li class="json-item"><strong class="json-key">${key}<span class="colon">:</span></strong> `;
+				if (typeof obj[key] === 'object') {
+					html += jsonToHtml(obj[key]);
+				} else {
+					html += `<span class="json-value">${obj[key]}</span>`;
+				}
+				html += '</li>';
+			}
+			html += '</ul>';
+			return html;
+		}
+		return obj;
+	}
+
+	jsonContainer.innerHTML = jsonToHtml(json);
+}
+
+function showErrorBanner(message) {
+	const banner = document.createElement('div');
+	banner.className = 'error-banner';
+	banner.textContent = message;
+
+	document.body.appendChild(banner);
+
+	// Trigger the drop-down animation
+	setTimeout(() => banner.classList.add('show'), 10);
+
+	// Retract the banner after 5 seconds
+	setTimeout(() => {
+		banner.classList.remove('show');
+		banner.addEventListener('transitionend', () => {
+			document.body.removeChild(banner);
+		}, { once: true });
+	}, 5000);
+}
+
+// Export for tests
+if (typeof module !== 'undefined' && module.exports) {
+	module.exports = { stylizeJSON, showErrorBanner, setRandomAsciiArt };
+}
