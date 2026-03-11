@@ -99,22 +99,35 @@ pre {
 	align-self: flex-start;
 }
 
-.json-list {
-	list-style-type: none;
-	padding-left: 20px;
-}
-
-.json-item {
-	margin-bottom: 5px;
+.json-brace,
+.json-bracket {
+	color: #aaaaaa;
 }
 
 .json-key {
 	color: #d9534f;
-	font-weight: bold;
+}
+
+.json-colon,
+.json-comma {
+	color: #aaaaaa;
 }
 
 .json-value {
 	color: #5bc0de;
+}
+
+.json-quote {
+	color: #5bc0de;
+}
+
+.json-number {
+	color: #f0ad4e;
+}
+
+.json-boolean,
+.json-null {
+	color: #9b59b6;
 }
 
 .json-link {

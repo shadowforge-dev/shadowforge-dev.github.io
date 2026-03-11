@@ -184,23 +184,41 @@ function stylizeJSON(json) {
 
 	traverseAndReplace(json);
 
-	// Convert JSON object to styled HTML
-	function jsonToHtml(obj) {
-		if (typeof obj === 'object') {
-			let html = '<ul class="json-list">';
-			for (const key in obj) {
-				html += `<li class="json-item"><strong class="json-key">${key}<span class="colon">:</span></strong> `;
-				if (typeof obj[key] === 'object') {
-					html += jsonToHtml(obj[key]);
-				} else {
-					html += `<span class="json-value">${obj[key]}</span>`;
-				}
-				html += '</li>';
-			}
-			html += '</ul>';
+	// Convert JSON object to styled HTML with real JSON syntax
+	function jsonToHtml(obj, indent = 0) {
+		const pad = '  '.repeat(indent);
+		const innerPad = '  '.repeat(indent + 1);
+
+		if (Array.isArray(obj)) {
+			if (obj.length === 0) return '<span class="json-bracket">[]</span>';
+			let html = '<span class="json-bracket">[</span>\n';
+			obj.forEach((item, i) => {
+				const comma = i < obj.length - 1 ? '<span class="json-comma">,</span>' : '';
+				html += `${innerPad}${jsonToHtml(item, indent + 1)}${comma}\n`;
+			});
+			html += `${pad}<span class="json-bracket">]</span>`;
 			return html;
+		} else if (typeof obj === 'object' && obj !== null) {
+			const keys = Object.keys(obj);
+			if (keys.length === 0) return '<span class="json-brace">{}</span>';
+			let html = '<span class="json-brace">{</span>\n';
+			keys.forEach((key, i) => {
+				const comma = i < keys.length - 1 ? '<span class="json-comma">,</span>' : '';
+				html += `${innerPad}<span class="json-key">"${key}"</span><span class="json-colon">: </span>${jsonToHtml(obj[key], indent + 1)}${comma}\n`;
+			});
+			html += `${pad}<span class="json-brace">}</span>`;
+			return html;
+		} else if (typeof obj === 'string') {
+			if (obj.includes('<a ')) {
+				return `<span class="json-quote">"</span>${obj}<span class="json-quote">"</span>`;
+			}
+			return `<span class="json-value">"${obj}"</span>`;
+		} else if (typeof obj === 'number') {
+			return `<span class="json-number">${obj}</span>`;
+		} else if (typeof obj === 'boolean') {
+			return `<span class="json-boolean">${obj}</span>`;
 		}
-		return obj;
+		return `<span class="json-null">null</span>`;
 	}
 
 	jsonContainer.innerHTML = jsonToHtml(json);
