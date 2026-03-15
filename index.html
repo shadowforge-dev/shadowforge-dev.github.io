@@ -11,7 +11,25 @@
 
 <body>
    <pre id="title-header" class="title-header"></pre>
-   <pre id="json-container"></pre>
+   <div class="bottom-content">
+      <pre id="json-container"></pre>
+      <div id="oldgold-widget" class="oldgold-widget" title="Coming soon">
+         <div class="oldgold-art">
+            <img class="oldgold-bar-icon" src="8-bit-oldgold.png" alt="OldGold">
+            <span class="oldgold-label">O L D G O L D</span>
+            <span class="oldgold-version">[ v0.6.11 ]</span>
+         </div>
+      </div>
+   </div>
+
+   <!-- OldGold Modal -->
+   <div id="oldgold-modal" class="oldgold-modal">
+      <div class="oldgold-modal-content">
+         <span id="oldgold-close" class="oldgold-close">[x]</span>
+         <pre id="oldgold-details"></pre>
+      </div>
+   </div>
+
    <script src="script.js"></script>
    <script>
       // Initialize random ASCII art
@@ -25,6 +43,9 @@
             console.error('Error loading JSON:', error);
             showErrorBanner('Failed to load data. Please try again later.');
          });
+
+      // Initialize OldGold widget
+      initOldGold();
    </script>
 </body>
 
