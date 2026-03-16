@@ -23,9 +23,9 @@ body {
 	font-family: 'PixelFont', 'Courier New', monospace;
 	display: flex;
 	flex-direction: column;
-	height: 100vh;
+	height: 100dvh;
 	margin: 0;
-	padding: 40px;
+	padding: 20px 40px;
 	box-sizing: border-box;
 	overflow: hidden;
 }
@@ -92,7 +92,7 @@ pre {
 
 #json-container {
 	font-family: 'PixelFont', 'Courier New', monospace;
-	padding: 10px 0;
+	padding: 0;
 	border-radius: 5px;
 	font-size: 20px;
 	max-width: 100%;
@@ -178,7 +178,7 @@ pre {
 	top: 0;
 	left: 50%;
 	transform: translate(-50%, 0);
-	height: 100px;
+	height: 80px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -213,8 +213,8 @@ pre {
 }
 
 .oldgold-bar-icon {
-	width: 100px;
-	height: 100px;
+	width: 80px;
+	height: 80px;
 	object-fit: contain;
 	image-rendering: pixelated;
 	filter: grayscale(1) brightness(0.6);
