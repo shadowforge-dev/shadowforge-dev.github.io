@@ -155,10 +155,51 @@ pre {
 
 /* OldGold widget */
 .oldgold-widget {
-	cursor: default;
+	cursor: pointer;
 	flex-shrink: 0;
 	padding-right: 40px;
 	opacity: 0.5;
+	position: relative;
+	transition: opacity 0.2s ease;
+}
+
+.oldgold-widget:hover {
+	opacity: 0.85;
+}
+
+.oldgold-widget:hover .oldgold-bar-icon {
+	filter: grayscale(0.6) brightness(0.8);
+}
+
+.oldgold-art::after {
+	content: "▶ COMING SOON ◀";
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translate(-50%, 0);
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #CFB53B;
+	font-family: monospace;
+	font-size: 13px;
+	letter-spacing: 2px;
+	white-space: nowrap;
+	opacity: 0;
+	text-shadow: 0 0 6px rgba(207, 181, 59, 0.6);
+	pointer-events: none;
+	transition: opacity 0.2s ease;
+}
+
+.oldgold-widget:hover .oldgold-art::after {
+	opacity: 1;
+	animation: retro-blink 1s step-end infinite;
+}
+
+@keyframes retro-blink {
+	0%, 100% { opacity: 1; }
+	50% { opacity: 0; }
 }
 
 .oldgold-art {
@@ -167,6 +208,7 @@ pre {
 	align-items: center;
 	gap: 6px;
 	margin: 0;
+	position: relative;
 }
 
 .oldgold-bar-icon {
