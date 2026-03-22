@@ -154,25 +154,42 @@ pre {
 	margin-top: 0;
 }
 
+/* App widgets container */
+.app-widgets {
+	display: flex;
+	flex-shrink: 0;
+	gap: 30px;
+	align-items: flex-start;
+	padding-right: 40px;
+}
+
 /* OldGold widget */
-.oldgold-widget {
+/* Shared widget styles */
+.oldgold-widget,
+.quiverbooks-widget,
+.psydex-widget {
 	cursor: pointer;
 	flex-shrink: 0;
-	padding-right: 40px;
 	opacity: 0.5;
 	position: relative;
 	transition: opacity 0.2s ease;
 }
 
-.oldgold-widget:hover {
+.oldgold-widget:hover,
+.quiverbooks-widget:hover,
+.psydex-widget:hover {
 	opacity: 0.85;
 }
 
-.oldgold-widget:hover .oldgold-bar-icon {
+.oldgold-widget:hover .oldgold-bar-icon,
+.quiverbooks-widget:hover .quiverbooks-bar-icon,
+.psydex-widget:hover .psydex-bar-icon {
 	filter: grayscale(0.6) brightness(0.8);
 }
 
-.oldgold-art::after {
+.oldgold-art::after,
+.quiverbooks-art::after,
+.psydex-art::after {
 	content: "▶ COMING SOON ◀";
 	position: absolute;
 	top: 0;
@@ -182,18 +199,33 @@ pre {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: #CFB53B;
 	font-family: monospace;
 	font-size: 13px;
 	letter-spacing: 2px;
 	white-space: nowrap;
 	opacity: 0;
-	text-shadow: 0 0 6px rgba(207, 181, 59, 0.6);
 	pointer-events: none;
 	transition: opacity 0.2s ease;
 }
 
-.oldgold-widget:hover .oldgold-art::after {
+.oldgold-art::after {
+	color: #CFB53B;
+	text-shadow: 0 0 6px rgba(207, 181, 59, 0.6);
+}
+
+.quiverbooks-art::after {
+	color: #5cb85c;
+	text-shadow: 0 0 6px rgba(92, 184, 92, 0.6);
+}
+
+.psydex-art::after {
+	color: #e6b800;
+	text-shadow: 0 0 6px rgba(230, 184, 0, 0.6);
+}
+
+.oldgold-widget:hover .oldgold-art::after,
+.quiverbooks-widget:hover .quiverbooks-art::after,
+.psydex-widget:hover .psydex-art::after {
 	opacity: 1;
 	animation: retro-blink 1s step-end infinite;
 }
@@ -203,7 +235,9 @@ pre {
 	50% { opacity: 0; }
 }
 
-.oldgold-art {
+.oldgold-art,
+.quiverbooks-art,
+.psydex-art {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -212,7 +246,9 @@ pre {
 	position: relative;
 }
 
-.oldgold-bar-icon {
+.oldgold-bar-icon,
+.quiverbooks-bar-icon,
+.psydex-bar-icon {
 	width: 80px;
 	height: 80px;
 	object-fit: contain;
@@ -220,21 +256,27 @@ pre {
 	filter: grayscale(1) brightness(0.6);
 }
 
-.oldgold-label {
+.oldgold-label,
+.quiverbooks-label,
+.psydex-label {
 	color: #888;
 	font-family: monospace;
 	font-size: clamp(10px, 1.2vw, 16px);
 	letter-spacing: 2px;
 }
 
-.oldgold-version {
+.oldgold-version,
+.quiverbooks-version,
+.psydex-version {
 	color: #666;
 	font-family: monospace;
 	font-size: clamp(8px, 1vw, 13px);
 }
 
-/* OldGold modal */
-.oldgold-modal {
+/* App modals - shared */
+.oldgold-modal,
+.quiverbooks-modal,
+.psydex-modal {
 	display: none;
 	position: fixed;
 	top: 0;
@@ -247,13 +289,16 @@ pre {
 	align-items: center;
 }
 
-.oldgold-modal.show {
+.oldgold-modal.show,
+.quiverbooks-modal.show,
+.psydex-modal.show {
 	display: flex;
 }
 
-.oldgold-modal-content {
+.oldgold-modal-content,
+.quiverbooks-modal-content,
+.psydex-modal-content {
 	background: #0a0a0a;
-	border: 1px solid #CFB53B;
 	border-radius: 4px;
 	padding: 30px 40px;
 	max-width: 600px;
@@ -261,25 +306,62 @@ pre {
 	max-height: 80vh;
 	overflow-y: auto;
 	position: relative;
+}
+
+.oldgold-modal-content {
+	border: 1px solid #CFB53B;
 	box-shadow: 0 0 30px rgba(207, 181, 59, 0.15);
 }
 
-.oldgold-close {
+.quiverbooks-modal-content {
+	border: 1px solid #5cb85c;
+	box-shadow: 0 0 30px rgba(92, 184, 92, 0.15);
+}
+
+.psydex-modal-content {
+	border: 1px solid #e6b800;
+	box-shadow: 0 0 30px rgba(230, 184, 0, 0.15);
+}
+
+.oldgold-close,
+.quiverbooks-close,
+.psydex-close {
 	position: absolute;
 	top: 10px;
 	right: 15px;
-	color: #CFB53B;
 	font-family: monospace;
 	font-size: 18px;
 	cursor: pointer;
 	transition: color 0.2s ease;
 }
 
+.oldgold-close {
+	color: #CFB53B;
+}
+
 .oldgold-close:hover {
 	color: #f0ad4e;
 }
 
-#oldgold-details {
+.quiverbooks-close {
+	color: #5cb85c;
+}
+
+.quiverbooks-close:hover {
+	color: #7dd87d;
+}
+
+.psydex-close {
+	color: #e6b800;
+}
+
+.psydex-close:hover {
+	color: #ffd633;
+}
+
+#oldgold-details,
+#quiverbooks-details,
+#psydex-details {
 	font-family: 'PixelFont', 'Courier New', monospace;
 	font-size: 16px;
 	margin: 0;
@@ -292,15 +374,26 @@ pre {
 		gap: 30px;
 	}
 
-	.oldgold-widget {
+	.app-widgets {
+		align-self: center;
+		padding-right: 0;
+	}
+
+	.oldgold-widget,
+	.quiverbooks-widget,
+	.psydex-widget {
 		align-self: center;
 	}
 
-	.oldgold-modal-content {
+	.oldgold-modal-content,
+	.quiverbooks-modal-content,
+	.psydex-modal-content {
 		padding: 20px;
 	}
 
-	#oldgold-details {
+	#oldgold-details,
+	#quiverbooks-details,
+	#psydex-details {
 		font-size: 13px;
 	}
 }

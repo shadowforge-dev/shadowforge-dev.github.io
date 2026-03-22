@@ -13,11 +13,27 @@
    <pre id="title-header" class="title-header"></pre>
    <div class="bottom-content">
       <pre id="json-container"></pre>
-      <div id="oldgold-widget" class="oldgold-widget" title="Coming soon">
-         <div class="oldgold-art">
-            <img class="oldgold-bar-icon" src="8-bit-oldgold.png" alt="OldGold">
-            <span class="oldgold-label">O L D G O L D</span>
-            <span class="oldgold-version">[ v0.6.11 ]</span>
+      <div class="app-widgets">
+         <div id="oldgold-widget" class="oldgold-widget" title="Coming soon">
+            <div class="oldgold-art">
+               <img class="oldgold-bar-icon" src="8-bit-oldgold.png" alt="OldGold">
+               <span class="oldgold-label">O L D G O L D</span>
+               <span class="oldgold-version">[ v0.6.11 ]</span>
+            </div>
+         </div>
+         <div id="quiverbooks-widget" class="quiverbooks-widget" title="Coming soon">
+            <div class="quiverbooks-art">
+               <img class="quiverbooks-bar-icon" src="8-bit-quiverbooks.png" alt="QuiverBooks">
+               <span class="quiverbooks-label">Q U I V E R B O O K S</span>
+               <span class="quiverbooks-version">[ v0.6.11 ]</span>
+            </div>
+         </div>
+         <div id="psydex-widget" class="psydex-widget" title="Coming soon">
+            <div class="psydex-art">
+               <img class="psydex-bar-icon" src="8-bit-psydex.webp" alt="Psydex">
+               <span class="psydex-label">P S Y D E X</span>
+               <span class="psydex-version">[ v0.6.11 ]</span>
+            </div>
          </div>
       </div>
    </div>
@@ -27,6 +43,22 @@
       <div class="oldgold-modal-content">
          <span id="oldgold-close" class="oldgold-close">[x]</span>
          <pre id="oldgold-details"></pre>
+      </div>
+   </div>
+
+   <!-- QuiverBooks Modal -->
+   <div id="quiverbooks-modal" class="quiverbooks-modal">
+      <div class="quiverbooks-modal-content">
+         <span id="quiverbooks-close" class="quiverbooks-close">[x]</span>
+         <pre id="quiverbooks-details"></pre>
+      </div>
+   </div>
+
+   <!-- Psydex Modal -->
+   <div id="psydex-modal" class="psydex-modal">
+      <div class="psydex-modal-content">
+         <span id="psydex-close" class="psydex-close">[x]</span>
+         <pre id="psydex-details"></pre>
       </div>
    </div>
 
@@ -44,8 +76,10 @@
             showErrorBanner('Failed to load data. Please try again later.');
          });
 
-      // Initialize OldGold widget
+      // Initialize app widgets
       initOldGold();
+      initQuiverBooks();
+      initPsydex();
    </script>
 </body>
 

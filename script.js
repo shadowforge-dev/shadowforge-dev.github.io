@@ -195,7 +195,179 @@ function initOldGold() {
 	});
 }
 
+function initQuiverBooks() {
+	const widget = document.getElementById('quiverbooks-widget');
+	const modal = document.getElementById('quiverbooks-modal');
+	const closeBtn = document.getElementById('quiverbooks-close');
+	const details = document.getElementById('quiverbooks-details');
+
+	if (!widget || !modal) return;
+
+	const quiverBooksData = {
+		app: {
+			name: "QuiverBooks",
+			version: "0.6.11",
+			platform: "iOS / macOS",
+			description: "Digital bookshelf & reading tracker",
+			contact: "help@shadowforge.dev"
+		},
+		features: [
+			"Personal library management",
+			"Reading progress tracking",
+			"Book notes & annotations",
+			"Reading stats & streaks",
+			"Custom shelves & collections",
+			"Barcode scanner import",
+			"Offline support"
+		]
+	};
+
+	function renderDetails(obj, indent) {
+		indent = indent || 0;
+		const pad = '  '.repeat(indent);
+		const innerPad = '  '.repeat(indent + 1);
+
+		if (Array.isArray(obj)) {
+			if (obj.length === 0) return '<span class="json-bracket">[]</span>';
+			let html = '<span class="json-bracket">[</span>\n';
+			obj.forEach(function(item, i) {
+				const comma = i < obj.length - 1 ? '<span class="json-comma">,</span>' : '';
+				html += innerPad + renderDetails(item, indent + 1) + comma + '\n';
+			});
+			html += pad + '<span class="json-bracket">]</span>';
+			return html;
+		} else if (typeof obj === 'object' && obj !== null) {
+			const keys = Object.keys(obj);
+			if (keys.length === 0) return '<span class="json-brace">{}</span>';
+			let html = '<span class="json-brace">{</span>\n';
+			keys.forEach(function(key, i) {
+				const comma = i < keys.length - 1 ? '<span class="json-comma">,</span>' : '';
+				html += innerPad + '<span class="json-key">"' + key + '"</span><span class="json-colon">: </span>' + renderDetails(obj[key], indent + 1) + comma + '\n';
+			});
+			html += pad + '<span class="json-brace">}</span>';
+			return html;
+		} else if (typeof obj === 'string') {
+			if (obj.includes('@')) {
+				return '<span class="json-quote">"</span><a href="mailto:' + obj + '" class="json-link">' + obj + '</a><span class="json-quote">"</span>';
+			}
+			return '<span class="json-value">"' + obj + '"</span>';
+		} else if (typeof obj === 'number') {
+			return '<span class="json-number">' + obj + '</span>';
+		}
+		return '<span class="json-null">null</span>';
+	}
+
+	details.innerHTML = renderDetails(quiverBooksData);
+
+	// Widget click disabled — not yet released
+	// widget.addEventListener('click', function() {
+	// 	modal.classList.add('show');
+	// });
+
+	closeBtn.addEventListener('click', function() {
+		modal.classList.remove('show');
+	});
+
+	modal.addEventListener('click', function(e) {
+		if (e.target === modal) {
+			modal.classList.remove('show');
+		}
+	});
+
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'Escape') {
+			modal.classList.remove('show');
+		}
+	});
+}
+
+function initPsydex() {
+	const widget = document.getElementById('psydex-widget');
+	const modal = document.getElementById('psydex-modal');
+	const closeBtn = document.getElementById('psydex-close');
+	const details = document.getElementById('psydex-details');
+
+	if (!widget || !modal) return;
+
+	const psydexData = {
+		app: {
+			name: "Psydex",
+			version: "0.6.11",
+			platform: "iOS / macOS",
+			description: "Pokédex companion & tracker",
+			contact: "help@shadowforge.dev"
+		},
+		features: [
+			"Complete Pokédex browser",
+			"Living dex tracker",
+			"Team builder & analysis",
+			"Type matchup calculator",
+			"Shiny hunting tracker",
+			"Trade checklist",
+			"Offline database"
+		]
+	};
+
+	function renderDetails(obj, indent) {
+		indent = indent || 0;
+		const pad = '  '.repeat(indent);
+		const innerPad = '  '.repeat(indent + 1);
+
+		if (Array.isArray(obj)) {
+			if (obj.length === 0) return '<span class="json-bracket">[]</span>';
+			let html = '<span class="json-bracket">[</span>\n';
+			obj.forEach(function(item, i) {
+				const comma = i < obj.length - 1 ? '<span class="json-comma">,</span>' : '';
+				html += innerPad + renderDetails(item, indent + 1) + comma + '\n';
+			});
+			html += pad + '<span class="json-bracket">]</span>';
+			return html;
+		} else if (typeof obj === 'object' && obj !== null) {
+			const keys = Object.keys(obj);
+			if (keys.length === 0) return '<span class="json-brace">{}</span>';
+			let html = '<span class="json-brace">{</span>\n';
+			keys.forEach(function(key, i) {
+				const comma = i < keys.length - 1 ? '<span class="json-comma">,</span>' : '';
+				html += innerPad + '<span class="json-key">"' + key + '"</span><span class="json-colon">: </span>' + renderDetails(obj[key], indent + 1) + comma + '\n';
+			});
+			html += pad + '<span class="json-brace">}</span>';
+			return html;
+		} else if (typeof obj === 'string') {
+			if (obj.includes('@')) {
+				return '<span class="json-quote">"</span><a href="mailto:' + obj + '" class="json-link">' + obj + '</a><span class="json-quote">"</span>';
+			}
+			return '<span class="json-value">"' + obj + '"</span>';
+		} else if (typeof obj === 'number') {
+			return '<span class="json-number">' + obj + '</span>';
+		}
+		return '<span class="json-null">null</span>';
+	}
+
+	details.innerHTML = renderDetails(psydexData);
+
+	// Widget click disabled — not yet released
+	// widget.addEventListener('click', function() {
+	// 	modal.classList.add('show');
+	// });
+
+	closeBtn.addEventListener('click', function() {
+		modal.classList.remove('show');
+	});
+
+	modal.addEventListener('click', function(e) {
+		if (e.target === modal) {
+			modal.classList.remove('show');
+		}
+	});
+
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'Escape') {
+			modal.classList.remove('show');
+		}
+	});
+}
+
 // Export for tests
 if (typeof module !== 'undefined' && module.exports) {
-	module.exports = { stylizeJSON, showErrorBanner, setRandomAsciiArt, initOldGold };
+	module.exports = { stylizeJSON, showErrorBanner, setRandomAsciiArt, initOldGold, initQuiverBooks, initPsydex };
 }
