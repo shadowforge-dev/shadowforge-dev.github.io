@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSYDEX // ADMIN ACCESS</title>
+    <style>
+        @font-face {
+            font-family: 'PixelFont';
+            src: url('https://shadowforge.dev/pixel-inet.ttf') format('truetype');
+            font-display: swap;
+        }
+
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+        :root {
+            --gold: #e6b800;
+            --gold-dim: #8a6f00;
+            --gold-glow: rgba(230, 184, 0, 0.15);
+            --cyan: #5bc0de;
+            --red: #d9534f;
+            --green: #5cb85c;
+            --yellow: #f0ad4e;
+            --bg: #000;
+            --surface: #0a0a0a;
+            --border: #1a1a1a;
+            --text-dim: #444;
+            --text-mid: #666;
+            --scanline-opacity: 0.03;
+        }
+
+        body {
+            background: var(--bg);
+            font-family: 'PixelFont', 'Courier New', monospace;
+            color: var(--gold);
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Scanline overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, var(--scanline-opacity)) 2px,
+                rgba(0, 0, 0, var(--scanline-opacity)) 4px
+            );
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        /* Vignette */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.6) 100%);
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        /* ASCII header */
+        .ascii-header {
+            font-family: monospace;
+            font-size: clamp(5px, 1.1vw, 12px);
+            line-height: 1.1;
+            white-space: pre;
+            text-align: center;
+            color: transparent;
+            background: linear-gradient(135deg, var(--gold), var(--cyan), var(--green), var(--yellow), var(--gold));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: gradient-shift 12s ease infinite;
+            margin-bottom: 32px;
+            user-select: none;
+            opacity: 0;
+            animation: gradient-shift 12s ease infinite, fade-down 0.8s ease 0.2s forwards;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes fade-down {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Login container */
+        .login-container {
+            width: 90%;
+            max-width: 420px;
+            position: relative;
+            opacity: 0;
+            animation: fade-up 0.6s ease 0.5s forwards;
+        }
+
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Terminal frame */
+        .terminal-frame {
+            border: 1px solid var(--gold-dim);
+            background: var(--surface);
+            box-shadow:
+                0 0 40px var(--gold-glow),
+                inset 0 0 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .terminal-frame::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border: 1px solid transparent;
+            background: linear-gradient(135deg, var(--gold), transparent 40%, transparent 60%, var(--gold-dim)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        /* Title bar */
+        .title-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border);
+            background: rgba(230, 184, 0, 0.03);
+        }
+
+        .title-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .title-bar-dots {
+            display: flex;
+            gap: 5px;
+        }
+
+        .title-bar-dots span {
+            width: 8px;
+            height: 8px;
+            border-radius: 0;
+            display: block;
+        }
+        .title-bar-dots span:nth-child(1) { background: var(--red); }
+        .title-bar-dots span:nth-child(2) { background: var(--yellow); }
+        .title-bar-dots span:nth-child(3) { background: var(--green); }
+
+        .title-bar-text {
+            font-size: 11px;
+            color: var(--text-mid);
+            letter-spacing: 2px;
+        }
+
+        .title-bar-status {
+            font-size: 10px;
+            color: var(--gold-dim);
+            letter-spacing: 1px;
+        }
+
+        /* Terminal body */
+        .terminal-body {
+            padding: 28px 24px;
+        }
+
+        .system-line {
+            font-size: 11px;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+            letter-spacing: 1px;
+        }
+
+        .system-line.highlight {
+            color: var(--gold-dim);
+        }
+
+        .system-line .blink {
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 20px 0;
+        }
+
+        .access-label {
+            font-size: 13px;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .access-sublabel {
+            font-size: 10px;
+            color: var(--text-mid);
+            text-align: center;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+        }
+
+        /* Email input */
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .input-label {
+            font-size: 10px;
+            color: var(--gold-dim);
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .input-field {
+            width: 100%;
+            background: rgba(230, 184, 0, 0.04);
+            border: 1px solid var(--border);
+            color: var(--cyan);
+            font-family: 'PixelFont', 'Courier New', monospace;
+            font-size: 14px;
+            padding: 12px 14px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            caret-color: var(--gold);
+        }
+
+        .input-field::placeholder {
+            color: var(--text-dim);
+            font-size: 12px;
+        }
+
+        .input-field:focus {
+            border-color: var(--gold-dim);
+            box-shadow: 0 0 12px var(--gold-glow);
+        }
+
+        /* Submit button */
+        .submit-btn {
+            width: 100%;
+            background: transparent;
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            font-family: 'PixelFont', 'Courier New', monospace;
+            font-size: 13px;
+            letter-spacing: 3px;
+            padding: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .submit-btn:hover {
+            background: rgba(230, 184, 0, 0.08);
+            border-color: var(--gold);
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* OTP code input (shown after email submit) */
+        .otp-notice {
+            font-size: 10px;
+            color: var(--green);
+            text-align: center;
+            margin-top: 16px;
+            letter-spacing: 1px;
+            display: none;
+        }
+
+        .otp-notice.show {
+            display: block;
+            animation: fade-up 0.3s ease;
+        }
+
+        /* Footer */
+        .terminal-footer {
+            padding: 10px 16px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-left {
+            font-size: 9px;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+        }
+
+        .footer-right {
+            font-size: 9px;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+        }
+
+        .footer-right a {
+            color: var(--gold-dim);
+            text-decoration: none;
+        }
+
+        .footer-right a:hover {
+            color: var(--gold);
+        }
+
+        /* Psydex icon */
+        .psydex-icon {
+            width: 48px;
+            height: 48px;
+            image-rendering: pixelated;
+            display: block;
+            margin: 0 auto 16px;
+            filter: grayscale(0.3) brightness(0.9);
+        }
+
+        /* Typing cursor effect on system lines */
+        .cursor-after::after {
+            content: '_';
+            animation: blink 1s step-end infinite;
+        }
+
+        /* Mobile */
+        @media (max-width: 520px) {
+            .ascii-header { font-size: clamp(3px, 2.5vw, 8px); margin-bottom: 20px; }
+            .terminal-body { padding: 20px 16px; }
+            .title-bar-status { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<pre class="ascii-header">
+ _____            ______   _____      _____      _____        ______
+___|\    \       ___|\     \ |\    \    /    /| ___|\    \   ___|\     \  _____      _____
+|    |\    \     |    |\     \| \    \  /    / ||    |\    \ |     \     \ \    \    /    /
+|    | |    |    |    |/____/||  \____\/    /  /|    | |    ||     ,_____/| \    \  /    /
+|    |/____/| ___|    \|   | | \ |    /    /  / |    | |    ||     \--'\_|/  \____\/____/
+|    ||    |||    \    \___|/   \|___/    /  /  |    | |    ||     /___/|    /    /\    \
+|    ||____|/|    |\     \          /    /  /   |    | |    ||     \____|\  /    /  \    \
+|____|       |\ ___\|_____|        /____/  /    |____|/____/||____ '     /|/____/ /\ \____\
+|    |       | |    |     |       |`    | /     |    /    | ||    /_____/ ||    |/  \|    |
+|____|        \|____|_____|       |_____|/      |____|____|/ |____|     | /|____|    |____|
+  \(             \(    )/            )/           \(    )/     \( |_____|/   \(        )/
+   '              '    '             '             '    '       '    )/       '        '
+                                                                     '
+</pre>
+
+<div class="login-container">
+    <div class="terminal-frame">
+        <div class="title-bar">
+            <div class="title-bar-left">
+                <div class="title-bar-dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <span class="title-bar-text">PSYDEX ADMIN</span>
+            </div>
+            <span class="title-bar-status">RESTRICTED</span>
+        </div>
+
+        <div class="terminal-body">
+            <div class="system-line">SYS.INIT // PSYDEX ADMIN TERMINAL v1.0</div>
+            <div class="system-line">CONNECTION: SECURE [TLS 1.3]</div>
+            <div class="system-line highlight">STATUS: AWAITING AUTHENTICATION<span class="blink">_</span></div>
+
+            <hr class="divider">
+
+            <img src="https://shadowforge.dev/8-bit-psydex.webp" alt="Psydex" class="psydex-icon">
+
+            <div class="access-label">ADMIN ACCESS</div>
+            <div class="access-sublabel">ENTER AUTHORIZED EMAIL FOR ONE-TIME CODE</div>
+
+            <form id="auth-form">
+                <div class="input-group">
+                    <label class="input-label">EMAIL ADDRESS</label>
+                    <input type="email" class="input-field" id="email-input" placeholder="operator@shadowforge.dev" autocomplete="email" required autofocus>
+                </div>
+                <button type="submit" class="submit-btn">AUTHENTICATE</button>
+            </form>
+
+            <div class="otp-notice" id="otp-notice">
+                OTP DISPATCHED // CHECK YOUR INBOX
+            </div>
+        </div>
+
+        <div class="terminal-footer">
+            <span class="footer-left">SHADOWFORGE LLC</span>
+            <span class="footer-right"><a href="https://shadowforge.dev">shadowforge.dev</a></span>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Visual-only form interaction for the hosted page
+    // Actual auth is handled by Cloudflare Access — this page is the custom appearance
+    const form = document.getElementById('auth-form');
+    const notice = document.getElementById('otp-notice');
+
+    form.addEventListener('submit', function(e) {
+        // If Cloudflare Access is handling the form, let it through
+        // This fallback is for when viewing the page standalone
+        if (!window.__cfAccessFormHandled) {
+            e.preventDefault();
+            notice.classList.add('show');
+            const btn = form.querySelector('.submit-btn');
+            btn.textContent = 'CODE SENT';
+            btn.style.borderColor = '#5cb85c';
+            btn.style.color = '#5cb85c';
+            setTimeout(() => {
+                btn.textContent = 'AUTHENTICATE';
+                btn.style.borderColor = '';
+                btn.style.color = '';
+                notice.classList.remove('show');
+            }, 3000);
+        }
+    });
+</script>
+</body>
+</html>

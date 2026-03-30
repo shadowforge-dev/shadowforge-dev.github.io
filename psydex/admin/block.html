@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSYDEX // ACCESS DENIED</title>
+    <style>
+        @font-face {
+            font-family: 'PixelFont';
+            src: url('https://shadowforge.dev/pixel-inet.ttf') format('truetype');
+            font-display: swap;
+        }
+
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+        :root {
+            --red: #d9534f;
+            --red-dim: #8a2b29;
+            --red-glow: rgba(217, 83, 79, 0.15);
+            --gold-dim: #8a6f00;
+            --bg: #000;
+            --surface: #0a0a0a;
+            --border: #1a1a1a;
+            --text-dim: #444;
+            --text-mid: #666;
+        }
+
+        body {
+            background: var(--bg);
+            font-family: 'PixelFont', 'Courier New', monospace;
+            color: var(--red);
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.6) 100%);
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 460px;
+            animation: fade-up 0.6s ease forwards;
+        }
+
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .frame {
+            border: 1px solid var(--red-dim);
+            background: var(--surface);
+            box-shadow: 0 0 40px var(--red-glow);
+        }
+
+        .title-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border);
+            background: rgba(217, 83, 79, 0.03);
+        }
+
+        .title-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .title-bar-dots {
+            display: flex;
+            gap: 5px;
+        }
+
+        .title-bar-dots span {
+            width: 8px;
+            height: 8px;
+            background: var(--red-dim);
+        }
+
+        .title-bar-text {
+            font-size: 11px;
+            color: var(--text-mid);
+            letter-spacing: 2px;
+        }
+
+        .title-bar-status {
+            font-size: 10px;
+            color: var(--red);
+            letter-spacing: 1px;
+            animation: blink 2s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .body {
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .error-code {
+            font-family: monospace;
+            font-size: 64px;
+            font-weight: bold;
+            color: var(--red);
+            letter-spacing: 8px;
+            margin-bottom: 8px;
+            text-shadow: 0 0 20px var(--red-glow);
+        }
+
+        .error-label {
+            font-size: 14px;
+            color: var(--red);
+            letter-spacing: 4px;
+            margin-bottom: 24px;
+        }
+
+        .error-detail {
+            font-size: 11px;
+            color: var(--text-mid);
+            letter-spacing: 1px;
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid var(--red-dim);
+            color: var(--red);
+            font-family: 'PixelFont', 'Courier New', monospace;
+            font-size: 12px;
+            letter-spacing: 2px;
+            padding: 12px 28px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .back-btn:hover {
+            background: rgba(217, 83, 79, 0.08);
+            border-color: var(--red);
+            box-shadow: 0 0 16px var(--red-glow);
+        }
+
+        .footer {
+            padding: 10px 16px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer span {
+            font-size: 9px;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+        }
+
+        .footer a { color: var(--red-dim); text-decoration: none; }
+        .footer a:hover { color: var(--red); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="frame">
+        <div class="title-bar">
+            <div class="title-bar-left">
+                <div class="title-bar-dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <span class="title-bar-text">PSYDEX ADMIN</span>
+            </div>
+            <span class="title-bar-status">ALERT</span>
+        </div>
+
+        <div class="body">
+            <div class="error-code">403</div>
+            <div class="error-label">ACCESS DENIED</div>
+            <div class="error-detail">
+                YOUR IDENTITY IS NOT AUTHORIZED<br>
+                TO ACCESS THIS TERMINAL.<br><br>
+                IF YOU BELIEVE THIS IS AN ERROR,<br>
+                CONTACT THE SYSTEM ADMINISTRATOR.
+            </div>
+            <a href="https://shadowforge.dev" class="back-btn">RETURN TO BASE</a>
+        </div>
+
+        <div class="footer">
+            <span>SHADOWFORGE LLC</span>
+            <span><a href="https://shadowforge.dev">shadowforge.dev</a></span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
