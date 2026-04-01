@@ -173,25 +173,9 @@ function initOldGold() {
 
 	details.innerHTML = renderDetails(oldGoldData);
 
-	// Widget click disabled — not yet released
-	// widget.addEventListener('click', function() {
-	// 	modal.classList.add('show');
-	// });
-
-	closeBtn.addEventListener('click', function() {
-		modal.classList.remove('show');
-	});
-
-	modal.addEventListener('click', function(e) {
-		if (e.target === modal) {
-			modal.classList.remove('show');
-		}
-	});
-
-	document.addEventListener('keydown', function(e) {
-		if (e.key === 'Escape') {
-			modal.classList.remove('show');
-		}
+	widget.style.cursor = 'pointer';
+	widget.addEventListener('click', function() {
+		window.location.href = '/oldgold';
 	});
 }
 
@@ -259,25 +243,9 @@ function initQuiverBooks() {
 
 	details.innerHTML = renderDetails(quiverBooksData);
 
-	// Widget click disabled — not yet released
-	// widget.addEventListener('click', function() {
-	// 	modal.classList.add('show');
-	// });
-
-	closeBtn.addEventListener('click', function() {
-		modal.classList.remove('show');
-	});
-
-	modal.addEventListener('click', function(e) {
-		if (e.target === modal) {
-			modal.classList.remove('show');
-		}
-	});
-
-	document.addEventListener('keydown', function(e) {
-		if (e.key === 'Escape') {
-			modal.classList.remove('show');
-		}
+	widget.style.cursor = 'pointer';
+	widget.addEventListener('click', function() {
+		window.location.href = 'https://quiverbooks.app';
 	});
 }
 
