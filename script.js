@@ -261,18 +261,18 @@ function initPsydex() {
 		app: {
 			name: "Psydex",
 			version: "0.6.11",
-			platform: "iOS / macOS",
-			description: "Pokédex companion & tracker",
+			platform: "iOS / iPadOS / macOS / visionOS",
+			description: "Pokemon card database, prices & collection tracker",
 			contact: "help@shadowforge.dev"
 		},
 		features: [
-			"Complete Pokédex browser",
-			"Living dex tracker",
-			"Team builder & analysis",
-			"Type matchup calculator",
-			"Shiny hunting tracker",
-			"Trade checklist",
-			"Offline database"
+			"128K+ cards across 11 languages",
+			"TCGPlayer & Cardmarket prices",
+			"Collection tracking with iCloud sync",
+			"Pokedex lore, sprites & evolution chains",
+			"Natural language search (on-device AI)",
+			"Card scanner (Vision OCR)",
+			"Siri & Spotlight integration"
 		]
 	};
 
@@ -313,25 +313,9 @@ function initPsydex() {
 
 	details.innerHTML = renderDetails(psydexData);
 
-	// Widget click disabled — not yet released
-	// widget.addEventListener('click', function() {
-	// 	modal.classList.add('show');
-	// });
-
-	closeBtn.addEventListener('click', function() {
-		modal.classList.remove('show');
-	});
-
-	modal.addEventListener('click', function(e) {
-		if (e.target === modal) {
-			modal.classList.remove('show');
-		}
-	});
-
-	document.addEventListener('keydown', function(e) {
-		if (e.key === 'Escape') {
-			modal.classList.remove('show');
-		}
+	widget.style.cursor = 'pointer';
+	widget.addEventListener('click', function() {
+		window.location.href = 'https://psydex.cards';
 	});
 }
 
