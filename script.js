@@ -122,8 +122,7 @@ function initOldGold() {
 			version: "0.6.11",
 			platform: "Safari Extension",
 			devices: ["iOS", "macOS"],
-			description: "Enhances old.reddit.com",
-			contact: "help@shadowforge.dev"
+			description: "Enhances old.reddit.com"
 		},
 		features: [
 			"Dark themes & color palettes",
@@ -175,7 +174,7 @@ function initOldGold() {
 
 	widget.style.cursor = 'pointer';
 	widget.addEventListener('click', function() {
-		window.location.href = '/oldgold';
+		window.location.href = 'https://oldgold.shadowforge.dev';
 	});
 }
 
@@ -192,8 +191,7 @@ function initQuiverBooks() {
 			name: "QuiverBooks",
 			version: "0.6.11",
 			platform: "iOS / macOS",
-			description: "Digital bookshelf & reading tracker",
-			contact: "help@shadowforge.dev"
+			description: "Digital bookshelf & reading tracker"
 		},
 		features: [
 			"Personal library management",
@@ -262,8 +260,7 @@ function initPsydex() {
 			name: "Psydex",
 			version: "0.6.11",
 			platform: "iOS / iPadOS / macOS / visionOS",
-			description: "Pokemon card database, prices & collection tracker",
-			contact: "help@shadowforge.dev"
+			description: "Pokemon card database, prices & collection tracker"
 		},
 		features: [
 			"128K+ cards across 11 languages",
