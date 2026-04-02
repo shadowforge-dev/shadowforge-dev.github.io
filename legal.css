@@ -35,7 +35,7 @@ body {
 }
 
 .legal-nav a {
-	color: #666;
+	color: #888;
 	text-decoration: none;
 	font-size: 14px;
 	letter-spacing: 1px;
@@ -134,19 +134,19 @@ a:hover {
 }
 
 /* App-specific accent colors */
-.accent-oldgold { color: #CFB53B; }
+.accent-oldgold .legal-title { color: #CFB53B; }
 .accent-oldgold a { color: #CFB53B; }
 .accent-oldgold a:hover { color: #f0ad4e; }
 .accent-oldgold h2 { color: #CFB53B; }
 .accent-oldgold h2::before { color: #CFB53B; opacity: 0.3; }
 
-.accent-quiverbooks { color: #5cb85c; }
+.accent-quiverbooks .legal-title { color: #5cb85c; }
 .accent-quiverbooks a { color: #5cb85c; }
 .accent-quiverbooks a:hover { color: #7dd87d; }
 .accent-quiverbooks h2 { color: #5cb85c; }
 .accent-quiverbooks h2::before { color: #5cb85c; opacity: 0.3; }
 
-.accent-psydex { color: #e6b800; }
+.accent-psydex .legal-title { color: #e6b800; }
 .accent-psydex a { color: #e6b800; }
 .accent-psydex a:hover { color: #ffd633; }
 .accent-psydex h2 { color: #e6b800; }
