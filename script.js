@@ -191,16 +191,16 @@ function initQuiverBooks() {
 			name: "QuiverBooks",
 			version: "0.6.11",
 			platform: "iOS / macOS",
-			description: "Digital bookshelf & reading tracker"
+			description: "Your personal e-reader adventure"
 		},
 		features: [
-			"Personal library management",
-			"Reading progress tracking",
-			"Book notes & annotations",
-			"Reading stats & streaks",
-			"Custom shelves & collections",
-			"Barcode scanner import",
-			"Offline support"
+			"EPUB, MOBI, AZW, PDF, CBZ",
+			"13 themes, customizable typography",
+			"Bookmarks, highlights, annotation export",
+			"Daily quests, achievements, character sheet",
+			"X-Ray Index (on-device)",
+			"Collections & smart filters",
+			"Zero tracking, zero data collection"
 		]
 	};
 
