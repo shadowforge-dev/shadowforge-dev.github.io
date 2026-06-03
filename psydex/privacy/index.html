@@ -14,55 +14,70 @@
 			<div class="legal-nav"><a href="https://psydex.cards">← Psydex</a></div>
 			<h1 class="legal-title">Psydex</h1>
 			<div class="legal-subtitle">Privacy Policy</div>
-			<div class="legal-effective">Effective: March 24, 2026</div>
+			<div class="legal-effective">Effective: June 2, 2026</div>
 		</div>
 
 		<h2>Overview</h2>
-		<p>Psydex is a Pokemon Trading Card Game companion app for iOS developed by ShadowForge LLC. This policy explains what data Psydex accesses, stores, and shares.</p>
+		<p>Psydex is a Pokemon Trading Card Game database, price tracker, and collection manager for iOS, developed by ShadowForge LLC. This policy explains what data Psydex accesses, stores on your device, and transmits to our servers. Psydex does not require an account, a login, or any personal information to use.</p>
 
-		<h2>Data We Do Not Collect</h2>
+		<h2>What We Do Not Do</h2>
 		<ul>
-			<li>We do not collect personal information or require an account</li>
-			<li>We do not use third-party analytics or tracking services</li>
+			<li>We do not require an account or ask for your name, email, or Apple ID</li>
+			<li>We do not use third-party analytics, advertising, or tracking SDKs</li>
+			<li>We do not track you across other apps or websites</li>
 			<li>We do not serve ads</li>
 			<li>We do not sell or share your data with third parties</li>
 		</ul>
 
+		<h2>Anonymous Identifier</h2>
+		<p>To keep your price watchlist and alerts in sync across your own devices, Psydex generates a random, anonymous identifier and stores it in your private iCloud key-value store. This identifier is not linked to your name, email, or Apple ID, and is not used to track you. It is sent with certain requests so that the watchlist and alerts you create are returned only to you.</p>
+
 		<h2>Data Stored on Your Device</h2>
-		<p>Psydex stores the following locally on your device:</p>
+		<p>The following is stored locally on your device:</p>
 		<ul>
-			<li>Your card collections, wishlists, and trade binders</li>
-			<li>Card ownership details (condition, finish, purchase price, notes)</li>
-			<li>Search history and recently viewed cards</li>
-			<li>App preferences and theme settings</li>
+			<li>Your card collections, wishlists, and ownership details (condition, finish, purchase price, notes)</li>
+			<li>Recently viewed cards and app preferences (theme, settings)</li>
+			<li>Cached card images and Pokemon sprites, for offline access and performance</li>
 		</ul>
+		<p>Your collection data is synced across your devices through Apple's CloudKit using your private iCloud account. This data travels through Apple's iCloud infrastructure; ShadowForge LLC cannot access it. You can manage iCloud sync in your device's system settings, and clear cached images through your device's storage settings.</p>
 
-		<h2>iCloud Sync</h2>
-		<p>Psydex uses Apple's CloudKit to sync your collection data across your devices. This data is transmitted directly through Apple's iCloud infrastructure. ShadowForge LLC does not have access to your iCloud data. You can manage iCloud sync in your device's system settings.</p>
+		<h2>Data Stored on Our Servers</h2>
+		<p>Psydex connects to ShadowForge's API (api.psydex.cards) for card data and the features below. The following is stored on our servers, associated only with the anonymous identifier described above — never with your identity:</p>
+		<ul>
+			<li><strong>Price watchlist:</strong> the cards you choose to track, your price thresholds, and any notes you add to a watchlist entry</li>
+			<li><strong>Push notification token:</strong> your device's Apple Push Notification token and the app version, used solely to deliver the price alerts you have enabled</li>
+		</ul>
+		<p>You can remove watchlist entries at any time within the app. To request deletion of the data associated with your anonymous identifier, contact us at the address below.</p>
 
-		<h2>Psydex API</h2>
-		<p>Psydex connects to ShadowForge's API servers to retrieve Pokemon TCG card data, including card details, set information, pricing data, and Pokemon species information. These requests include:</p>
+		<h2>Card Data Requests</h2>
+		<p>To retrieve card details, set information, prices, and Pokemon species data, your device sends requests to our API that may include:</p>
 		<ul>
 			<li>Search queries (card names, set names, filter criteria)</li>
-			<li>Your device's preferred language (to serve localized card data)</li>
+			<li>Your device's preferred language, to serve localized card data</li>
 			<li>Standard HTTP request metadata (IP address, user agent)</li>
 		</ul>
-		<p>We do not associate API requests with individual users. No collection data, personal information, or account identifiers are transmitted to our servers. Server logs are retained for operational purposes only and are not used for tracking.</p>
+		<p>Pricing information is sourced from publicly available market data (TCGPlayer, Cardmarket) and served through our API; your device does not connect to third-party pricing services directly. Server logs are retained for operational purposes only and are not used to build profiles or track individuals.</p>
 
-		<h2>Pricing Data</h2>
-		<p>Card pricing information displayed in Psydex is sourced from publicly available market data (TCGPlayer, Cardmarket). Price data is retrieved through ShadowForge's API — your device does not connect to third-party pricing services directly.</p>
+		<h2>Push Notifications</h2>
+		<p>If you enable price alerts on a watchlist entry, Psydex registers for Apple Push Notifications and sends you a notification only when a card you are tracking crosses the threshold you set. You can disable notifications at any time in the app or in your device's system settings.</p>
 
-		<h2>Images and Assets</h2>
-		<p>Card images and Pokemon sprites are served through our API and cached locally on your device for offline access and performance. Cached images can be cleared through your device's storage settings.</p>
+		<h2>Camera and Card Scanner</h2>
+		<p>The card scanner (a Psydex Pro feature) uses your device's camera to identify a physical card. Recognition happens entirely on your device using Apple's on-device text recognition. Camera frames are not recorded, stored, or uploaded. To help improve scan accuracy, Psydex may send anonymous diagnostic data about a scan's outcome (such as whether a match was found and confidence scores) that is not linked to your identifier and contains no images or photos.</p>
+
+		<h2>Feedback</h2>
+		<p>If you choose to send feedback from within the app, the message you write — along with an optional email address you provide, and basic device information (device model, OS version, app version, and locale) — is sent to ShadowForge so we can respond and fix issues. Providing an email address is optional and is used only to reply to you.</p>
+
+		<h2>In-App Purchases</h2>
+		<p>Psydex Pro is a one-time purchase handled entirely by Apple's App Store. We do not receive or store your payment information.</p>
 
 		<h2>Children's Privacy</h2>
-		<p>Psydex does not knowingly collect information from children under 13. The app does not require an account or collect personal data from any user.</p>
+		<p>Psydex does not knowingly collect personal information from children. The app does not require an account, and the data described above is anonymous.</p>
 
 		<h2>Changes to This Policy</h2>
 		<p>We may update this policy to reflect changes in the app or our services. Updates will be posted on this page with a revised effective date.</p>
 
 		<h2>Contact</h2>
-		<p>Questions about this policy? Reach us at <a href="mailto:hello@shadowforge.dev">hello@shadowforge.dev</a>.</p>
+		<p>Questions about this policy, or a data deletion request? Reach us at <a href="mailto:hello@shadowforge.dev">hello@shadowforge.dev</a>.</p>
 
 		<div class="legal-footer">
 			<a href="/terms/">Terms of Use</a>
