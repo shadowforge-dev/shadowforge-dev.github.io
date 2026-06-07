@@ -119,7 +119,7 @@ function initOldGold() {
 	const oldGoldData = {
 		app: {
 			name: "OldGold",
-			version: "0.6.11",
+			version: "1.1.0",
 			platform: "Safari Extension",
 			devices: ["iOS", "macOS"],
 			description: "Enhances old.reddit.com"
