@@ -118,8 +118,8 @@ function initOldGold() {
 
 	const oldGoldData = {
 		app: {
-			name: "OldGold",
-			version: "1.1.0",
+			name: "Old Gold Classic",
+			version: "1.1.2",
 			platform: "Safari Extension",
 			devices: ["iOS", "macOS"],
 			description: "Enhances old.reddit.com"
@@ -189,7 +189,7 @@ function initQuiverBooks() {
 	const quiverBooksData = {
 		app: {
 			name: "QuiverBooks",
-			version: "0.6.11",
+			version: "1.1.1",
 			platform: "iOS / macOS",
 			description: "Your personal e-reader adventure"
 		},
@@ -258,7 +258,7 @@ function initPsydex() {
 	const psydexData = {
 		app: {
 			name: "Psydex",
-			version: "0.6.11",
+			version: "1.1.1",
 			platform: "iOS / iPadOS / macOS / visionOS",
 			description: "Pokemon card database, prices & collection tracker"
 		},

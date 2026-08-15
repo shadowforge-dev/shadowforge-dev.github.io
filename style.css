@@ -157,6 +157,8 @@ pre {
 /* App widgets container */
 .app-widgets {
 	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
 	flex-shrink: 0;
 	gap: 30px;
 	align-items: flex-start;
@@ -187,54 +189,6 @@ pre {
 	filter: grayscale(0.6) brightness(0.8);
 }
 
-.oldgold-art::after,
-.quiverbooks-art::after,
-.psydex-art::after {
-	content: "▶ COMING SOON ◀";
-	position: absolute;
-	top: 0;
-	left: 50%;
-	transform: translate(-50%, 0);
-	height: 80px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-family: monospace;
-	font-size: 13px;
-	letter-spacing: 2px;
-	white-space: nowrap;
-	opacity: 0;
-	pointer-events: none;
-	transition: opacity 0.2s ease;
-}
-
-.oldgold-art::after {
-	color: #CFB53B;
-	text-shadow: 0 0 6px rgba(207, 181, 59, 0.6);
-}
-
-.quiverbooks-art::after {
-	color: #5cb85c;
-	text-shadow: 0 0 6px rgba(92, 184, 92, 0.6);
-}
-
-.psydex-art::after {
-	color: #e6b800;
-	text-shadow: 0 0 6px rgba(230, 184, 0, 0.6);
-}
-
-.oldgold-widget:hover .oldgold-art::after,
-.quiverbooks-widget:hover .quiverbooks-art::after,
-.psydex-widget:hover .psydex-art::after {
-	opacity: 1;
-	animation: retro-blink 1s step-end infinite;
-}
-
-@keyframes retro-blink {
-	0%, 100% { opacity: 1; }
-	50% { opacity: 0; }
-}
-
 .oldgold-art,
 .quiverbooks-art,
 .psydex-art {
@@ -263,6 +217,7 @@ pre {
 	font-family: monospace;
 	font-size: clamp(10px, 1.2vw, 16px);
 	letter-spacing: 2px;
+	text-align: center;
 }
 
 .oldgold-version,
