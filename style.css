@@ -152,6 +152,9 @@ pre {
 
 .bottom-content #json-container {
 	margin-top: 0;
+	/* Let the JSON rewrap when space is tight so the widget row, which cannot
+	   reflow without dropping an app onto a second line, keeps its row. */
+	min-width: 0;
 }
 
 /* App widgets container */
@@ -159,50 +162,50 @@ pre {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-end;
-	flex-shrink: 0;
-	gap: 30px;
+	gap: 40px 24px;
 	align-items: flex-start;
 	padding-right: 40px;
 }
 
-/* OldGold widget */
-/* Shared widget styles */
-.oldgold-widget,
-.quiverbooks-widget,
-.psydex-widget {
-	cursor: pointer;
-	flex-shrink: 0;
-	opacity: 0.5;
-	position: relative;
-	transition: opacity 0.2s ease;
-}
-
-.oldgold-widget:hover,
-.quiverbooks-widget:hover,
-.psydex-widget:hover {
-	opacity: 0.85;
-}
-
-.oldgold-widget:hover .oldgold-bar-icon,
-.quiverbooks-widget:hover .quiverbooks-bar-icon,
-.psydex-widget:hover .psydex-bar-icon {
-	filter: grayscale(0.6) brightness(0.8);
-}
-
-.oldgold-art,
-.quiverbooks-art,
-.psydex-art {
+/* App widget — one block for every app, accent supplied per app below */
+.app-widget {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 6px;
-	margin: 0;
-	position: relative;
+	flex-shrink: 0;
+	opacity: 0.5;
+	text-decoration: none;
+	transition: opacity 0.2s ease;
 }
 
-.oldgold-bar-icon,
-.quiverbooks-bar-icon,
-.psydex-bar-icon {
+.app-widget.oldgold {
+	--accent: #CFB53B;
+}
+
+.app-widget.quiverbooks {
+	--accent: #5cb85c;
+}
+
+.app-widget.psydex {
+	--accent: #e6b800;
+}
+
+.app-widget.tallystick {
+	--accent: #4FBF87;
+}
+
+.app-widget:hover,
+.app-widget:focus-visible {
+	opacity: 0.85;
+}
+
+.app-widget:hover .app-icon,
+.app-widget:focus-visible .app-icon {
+	filter: grayscale(0.6) brightness(0.8);
+}
+
+.app-icon {
 	width: 80px;
 	height: 80px;
 	object-fit: contain;
@@ -210,9 +213,7 @@ pre {
 	filter: grayscale(1) brightness(0.6);
 }
 
-.oldgold-label,
-.quiverbooks-label,
-.psydex-label {
+.app-label {
 	color: #888;
 	font-family: monospace;
 	font-size: clamp(10px, 1.2vw, 16px);
@@ -220,106 +221,42 @@ pre {
 	text-align: center;
 }
 
-.oldgold-version,
-.quiverbooks-version,
-.psydex-version {
+.app-version {
 	color: #666;
 	font-family: monospace;
 	font-size: clamp(8px, 1vw, 13px);
 }
 
-/* App modals - shared */
-.oldgold-modal,
-.quiverbooks-modal,
-.psydex-modal {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.85);
-	z-index: 1000;
-	justify-content: center;
-	align-items: center;
-}
-
-.oldgold-modal.show,
-.quiverbooks-modal.show,
-.psydex-modal.show {
-	display: flex;
-}
-
-.oldgold-modal-content,
-.quiverbooks-modal-content,
-.psydex-modal-content {
-	background: #0a0a0a;
-	border-radius: 4px;
-	padding: 30px 40px;
-	max-width: 600px;
-	width: 90%;
-	max-height: 80vh;
-	overflow-y: auto;
-	position: relative;
-}
-
-.oldgold-modal-content {
-	border: 1px solid #CFB53B;
-	box-shadow: 0 0 30px rgba(207, 181, 59, 0.15);
-}
-
-.quiverbooks-modal-content {
-	border: 1px solid #5cb85c;
-	box-shadow: 0 0 30px rgba(92, 184, 92, 0.15);
-}
-
-.psydex-modal-content {
-	border: 1px solid #e6b800;
-	box-shadow: 0 0 30px rgba(230, 184, 0, 0.15);
-}
-
-.oldgold-close,
-.quiverbooks-close,
-.psydex-close {
-	position: absolute;
-	top: 10px;
-	right: 15px;
+/*
+ * The menu cursor. It always occupies its line so that hovering one widget
+ * never nudges the row; only its visibility changes. steps(1) makes it snap
+ * on and off the way a game menu does, rather than fading.
+ */
+.app-select {
+	color: var(--accent);
 	font-family: monospace;
-	font-size: 18px;
-	cursor: pointer;
-	transition: color 0.2s ease;
+	font-size: clamp(8px, 1vw, 13px);
+	letter-spacing: 2px;
+	visibility: hidden;
 }
 
-.oldgold-close {
-	color: #CFB53B;
+.app-widget:hover .app-select,
+.app-widget:focus-visible .app-select {
+	visibility: visible;
+	animation: blink 0.8s steps(1, end) infinite;
 }
 
-.oldgold-close:hover {
-	color: #f0ad4e;
+@keyframes blink {
+	50% {
+		opacity: 0;
+	}
 }
 
-.quiverbooks-close {
-	color: #5cb85c;
-}
-
-.quiverbooks-close:hover {
-	color: #7dd87d;
-}
-
-.psydex-close {
-	color: #e6b800;
-}
-
-.psydex-close:hover {
-	color: #ffd633;
-}
-
-#oldgold-details,
-#quiverbooks-details,
-#psydex-details {
-	font-family: 'PixelFont', 'Courier New', monospace;
-	font-size: 16px;
-	margin: 0;
+@media (prefers-reduced-motion: reduce) {
+	.app-widget:hover .app-select,
+	.app-widget:focus-visible .app-select {
+		animation: none;
+	}
 }
 
 @media (max-width: 768px) {
@@ -331,25 +268,20 @@ pre {
 
 	.app-widgets {
 		align-self: center;
+		justify-content: center;
+		max-width: 100%;
+		gap: 28px 20px;
 		padding-right: 0;
 	}
 
-	.oldgold-widget,
-	.quiverbooks-widget,
-	.psydex-widget {
-		align-self: center;
-	}
-
-	.oldgold-modal-content,
-	.quiverbooks-modal-content,
-	.psydex-modal-content {
-		padding: 20px;
-	}
-
-	#oldgold-details,
-	#quiverbooks-details,
-	#psydex-details {
-		font-size: 13px;
+	/*
+	 * Two widgets have to fit side by side on a phone, and the widest label
+	 * ("Old Gold Classic") is what decides that. The letters already have real
+	 * spaces between them, so dropping the tracking here keeps the look and
+	 * buys back the ~50px that would otherwise push the row off-screen.
+	 */
+	.app-label {
+		letter-spacing: 0;
 	}
 }
 

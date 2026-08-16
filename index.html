@@ -14,51 +14,30 @@
    <div class="bottom-content">
       <pre id="json-container"></pre>
       <div class="app-widgets">
-         <div id="oldgold-widget" class="oldgold-widget" title="Open Old Gold Classic">
-            <div class="oldgold-art">
-               <img class="oldgold-bar-icon" src="8-bit-oldgold.png" alt="Old Gold Classic">
-               <span class="oldgold-label">O L D  G O L D  C L A S S I C</span>
-               <span class="oldgold-version">[ v1.1.2 ]</span>
-            </div>
-         </div>
-         <div id="quiverbooks-widget" class="quiverbooks-widget" title="Open QuiverBooks">
-            <div class="quiverbooks-art">
-               <img class="quiverbooks-bar-icon" src="8-bit-quiverbooks.png" alt="QuiverBooks">
-               <span class="quiverbooks-label">Q U I V E R B O O K S</span>
-               <span class="quiverbooks-version">[ v1.1.1 ]</span>
-            </div>
-         </div>
-         <div id="psydex-widget" class="psydex-widget" title="Open Psydex">
-            <div class="psydex-art">
-               <img class="psydex-bar-icon" src="8-bit-psydex.png" alt="Psydex">
-               <span class="psydex-label">P S Y D E X</span>
-               <span class="psydex-version">[ v1.1.1 ]</span>
-            </div>
-         </div>
-      </div>
-   </div>
-
-   <!-- OldGold Modal -->
-   <div id="oldgold-modal" class="oldgold-modal">
-      <div class="oldgold-modal-content">
-         <span id="oldgold-close" class="oldgold-close">[x]</span>
-         <pre id="oldgold-details"></pre>
-      </div>
-   </div>
-
-   <!-- QuiverBooks Modal -->
-   <div id="quiverbooks-modal" class="quiverbooks-modal">
-      <div class="quiverbooks-modal-content">
-         <span id="quiverbooks-close" class="quiverbooks-close">[x]</span>
-         <pre id="quiverbooks-details"></pre>
-      </div>
-   </div>
-
-   <!-- Psydex Modal -->
-   <div id="psydex-modal" class="psydex-modal">
-      <div class="psydex-modal-content">
-         <span id="psydex-close" class="psydex-close">[x]</span>
-         <pre id="psydex-details"></pre>
+         <a class="app-widget oldgold" href="https://oldgold.shadowforge.dev" title="Open Old Gold Classic">
+            <img class="app-icon" src="8-bit-oldgold.png" alt="Old Gold Classic">
+            <span class="app-label">O L D  G O L D  C L A S S I C</span>
+            <span class="app-version">[ v1.1.2 ]</span>
+            <span class="app-select" aria-hidden="true">&#9654; SELECT</span>
+         </a>
+         <a class="app-widget quiverbooks" href="https://quiverbooks.app" title="Open QuiverBooks">
+            <img class="app-icon" src="8-bit-quiverbooks.png" alt="QuiverBooks">
+            <span class="app-label">Q U I V E R B O O K S</span>
+            <span class="app-version">[ v1.1.1 ]</span>
+            <span class="app-select" aria-hidden="true">&#9654; SELECT</span>
+         </a>
+         <a class="app-widget psydex" href="https://psydex.cards" title="Open Psydex">
+            <img class="app-icon" src="8-bit-psydex.png" alt="Psydex">
+            <span class="app-label">P S Y D E X</span>
+            <span class="app-version">[ v1.1.1 ]</span>
+            <span class="app-select" aria-hidden="true">&#9654; SELECT</span>
+         </a>
+         <a class="app-widget tallystick" href="/tallystick/" title="Open Tallystick">
+            <img class="app-icon" src="8-bit-tallystick.png" alt="Tallystick">
+            <span class="app-label">T A L L Y S T I C K</span>
+            <span class="app-version">[ v1.0 ]</span>
+            <span class="app-select" aria-hidden="true">&#9654; SELECT</span>
+         </a>
       </div>
    </div>
 
@@ -75,11 +54,6 @@
             console.error('Error loading JSON:', error);
             showErrorBanner('Failed to load data. Please try again later.');
          });
-
-      // Initialize app widgets
-      initOldGold();
-      initQuiverBooks();
-      initPsydex();
    </script>
 </body>
 
