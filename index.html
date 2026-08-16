@@ -5,7 +5,15 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>shadowforge.dev</title>
-   <link rel="stylesheet" href="style.css">
+   <!--
+      GitHub Pages caches this page for 10 minutes but style.css and the images
+      for 4 hours, so a deploy that changes both leaves returning visitors on new
+      markup with a stale stylesheet — which renders the widget row as unstyled
+      full-size images. Bump ?v= whenever style.css or script.js changes; the
+      query makes it a different cache entry, so the new file is fetched with the
+      HTML rather than up to 4 hours later.
+   -->
+   <link rel="stylesheet" href="style.css?v=20260816">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
@@ -41,7 +49,7 @@
       </div>
    </div>
 
-   <script src="script.js"></script>
+   <script src="script.js?v=20260816"></script>
    <script>
       // Initialize random ASCII art
       setRandomAsciiArt();
