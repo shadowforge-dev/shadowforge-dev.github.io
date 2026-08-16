@@ -158,11 +158,16 @@ pre {
 }
 
 /* App widgets container */
+/*
+ * One row, always — the apps are meant to read as a single menu. The labels are
+ * full names without tracking, which is what makes four of them fit; nowrap
+ * keeps them on one line each so a long name cannot break the row's rhythm.
+ */
 .app-widgets {
 	display: flex;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 	justify-content: flex-end;
-	gap: 40px 24px;
+	gap: 24px;
 	align-items: flex-start;
 	padding-right: 40px;
 }
@@ -216,9 +221,9 @@ pre {
 .app-label {
 	color: #888;
 	font-family: monospace;
-	font-size: clamp(10px, 1.2vw, 16px);
-	letter-spacing: 2px;
+	font-size: clamp(9px, 1.2vw, 16px);
 	text-align: center;
+	white-space: nowrap;
 }
 
 .app-version {
@@ -270,18 +275,35 @@ pre {
 		align-self: center;
 		justify-content: center;
 		max-width: 100%;
-		gap: 28px 20px;
+		gap: 20px;
 		padding-right: 0;
 	}
+}
 
-	/*
-	 * Two widgets have to fit side by side on a phone, and the widest label
-	 * ("Old Gold Classic") is what decides that. The letters already have real
-	 * spaces between them, so dropping the tracking here keeps the look and
-	 * buys back the ~50px that would otherwise push the row off-screen.
-	 */
-	.app-label {
-		letter-spacing: 0;
+/*
+ * Phones. The row still may not wrap, so the icons give up the space instead —
+ * the widest label ("OLD GOLD CLASSIC") sets the floor for how narrow a widget
+ * can get, and shrinking the art is what keeps all four on the line.
+ */
+@media (max-width: 480px) {
+	.app-widgets {
+		gap: 10px;
+	}
+
+	.app-icon {
+		width: 64px;
+		height: 64px;
+	}
+}
+
+@media (max-width: 360px) {
+	.app-widgets {
+		gap: 6px;
+	}
+
+	.app-icon {
+		width: 52px;
+		height: 52px;
 	}
 }
 

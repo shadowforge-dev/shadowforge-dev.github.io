@@ -11,9 +11,11 @@
       markup with a stale stylesheet — which renders the widget row as unstyled
       full-size images. Bump ?v= whenever style.css or script.js changes; the
       query makes it a different cache entry, so the new file is fetched with the
-      HTML rather than up to 4 hours later.
+      HTML rather than up to 4 hours later. The token must change on every
+      deploy that touches those files, hence the -N suffix: two changes on one
+      day would otherwise share a token and the second would not be picked up.
    -->
-   <link rel="stylesheet" href="style.css?v=20260816">
+   <link rel="stylesheet" href="style.css?v=20260816-2">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
@@ -24,32 +26,32 @@
       <div class="app-widgets">
          <a class="app-widget oldgold" href="https://oldgold.shadowforge.dev" title="Open Old Gold Classic">
             <img class="app-icon" src="8-bit-oldgold.png" alt="Old Gold Classic">
-            <span class="app-label">O L D  G O L D  C L A S S I C</span>
+            <span class="app-label">OLD GOLD CLASSIC</span>
             <span class="app-version">[ v1.1.2 ]</span>
             <span class="app-select" aria-hidden="true">&#9654; SELECT</span>
          </a>
          <a class="app-widget quiverbooks" href="https://quiverbooks.app" title="Open QuiverBooks">
             <img class="app-icon" src="8-bit-quiverbooks.png" alt="QuiverBooks">
-            <span class="app-label">Q U I V E R B O O K S</span>
+            <span class="app-label">QUIVERBOOKS</span>
             <span class="app-version">[ v1.1.1 ]</span>
             <span class="app-select" aria-hidden="true">&#9654; SELECT</span>
          </a>
          <a class="app-widget psydex" href="https://psydex.cards" title="Open Psydex">
             <img class="app-icon" src="8-bit-psydex.png" alt="Psydex">
-            <span class="app-label">P S Y D E X</span>
-            <span class="app-version">[ v1.1.1 ]</span>
+            <span class="app-label">PSYDEX</span>
+            <span class="app-version">[ v1.1.2 ]</span>
             <span class="app-select" aria-hidden="true">&#9654; SELECT</span>
          </a>
          <a class="app-widget tallystick" href="/tallystick/" title="Open Tallystick">
             <img class="app-icon" src="8-bit-tallystick.png" alt="Tallystick">
-            <span class="app-label">T A L L Y S T I C K</span>
-            <span class="app-version">[ v1.0 ]</span>
+            <span class="app-label">TALLYSTICK</span>
+            <span class="app-version">[ v1.1.0 ]</span>
             <span class="app-select" aria-hidden="true">&#9654; SELECT</span>
          </a>
       </div>
    </div>
 
-   <script src="script.js?v=20260816"></script>
+   <script src="script.js?v=20260816-2"></script>
    <script>
       // Initialize random ASCII art
       setRandomAsciiArt();
