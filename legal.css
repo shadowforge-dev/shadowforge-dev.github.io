@@ -140,6 +140,12 @@ a:hover {
 .accent-oldgold h2 { color: #CFB53B; }
 .accent-oldgold h2::before { color: #CFB53B; opacity: 0.3; }
 
+.accent-tallystick .legal-title { color: #4FBF87; }
+.accent-tallystick a { color: #4FBF87; }
+.accent-tallystick a:hover { color: #6FD9A4; }
+.accent-tallystick h2 { color: #4FBF87; }
+.accent-tallystick h2::before { color: #4FBF87; opacity: 0.3; }
+
 .accent-quiverbooks .legal-title { color: #5cb85c; }
 .accent-quiverbooks a { color: #5cb85c; }
 .accent-quiverbooks a:hover { color: #7dd87d; }
