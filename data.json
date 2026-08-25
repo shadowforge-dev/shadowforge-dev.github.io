@@ -5,5 +5,9 @@
 		"contactInformation": {
 			"email": "hello@shadowforge.dev"
 		}
+	},
+	"sites": {
+		"questForFoodUrl": "https://questfor.food",
+		"plaintextCardsUrl": "https://plaintext.cards"
 	}
 }
