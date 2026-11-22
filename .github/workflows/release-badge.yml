@@ -1,0 +1,109 @@
+# Release wrap-up: when an app's version bump lands on its main branch, open a PR here
+# that moves the app's `[ vX.Y.Z ]` badge on index.html to the new version.
+#
+# Each app repo calls this from its own .github/workflows/release-badge.yml:
+#
+#   on: { push: { branches: [main], paths: ["**/project.pbxproj", "project.yml"] } }
+#   jobs:
+#     badge:
+#       uses: shadowforge-dev/shadowforge-dev.github.io/.github/workflows/release-badge.yml@main
+#       with: { widget: psydex }
+#       secrets: { token: "${{ secrets.PORTFOLIO_TOKEN }}" }
+#
+# Why it works this way:
+#   - A version bump is the release signal, so the app repo's push is the trigger. Nothing polls.
+#   - In a called workflow, `actions/checkout` with no repository checks out the CALLER
+#     (the app), so this reads the app's own MARKETING_VERSION.
+#   - The app's built-in token can't write to this repo, so the caller passes PORTFOLIO_TOKEN:
+#     a fine-grained token that can only edit this one repo (contents + pull requests).
+#   - The PR waits for Parker: the badge should change when Apple releases the version,
+#     not when the bump merges.
+on:
+  workflow_call:
+    inputs:
+      widget:
+        description: CSS class of the app's tile, as in <a class="app-widget psydex">
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+
+jobs:
+  badge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the app
+        uses: actions/checkout@v4
+        with: { path: app }
+
+      - name: Read the app's version
+        id: app
+        working-directory: app
+        run: |
+          # The highest MARKETING_VERSION in the project: extension targets often sit at 1.0.
+          v=$(git ls-files '*.pbxproj' 'project.yml' | xargs grep -hoE 'MARKETING_VERSION[ :=]+"?[0-9]+(\.[0-9]+)*' \
+              | grep -oE '[0-9]+(\.[0-9]+)*$' | sort -V | tail -1)
+          [ -n "$v" ] || { echo "no MARKETING_VERSION found"; exit 1; }
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+
+      - name: Check out the site
+        uses: actions/checkout@v4
+        with:
+          repository: shadowforge-dev/shadowforge-dev.github.io
+          token: ${{ secrets.token }}
+          path: site
+
+      - name: Move the badge and open the PR
+        working-directory: site
+        env:
+          GH_TOKEN: ${{ secrets.token }}
+          WIDGET: ${{ inputs.widget }}
+          VERSION: ${{ steps.app.outputs.version }}
+          APP_REPO: ${{ github.repository }}
+          APP_SHA: ${{ github.sha }}
+        run: |
+          current=$(python3 - <<'EOF'
+          import os, re
+          html = open("index.html").read()
+          tile = re.search(r'<a class="app-widget ' + re.escape(os.environ["WIDGET"]) + r'".*?</a>', html, re.S)
+          badge = tile and re.search(r'<span class="app-version">\[ v([\d.]+) \]</span>', tile.group(0))
+          print(badge.group(1) if badge else "")
+          EOF
+          )
+          if [ -z "$current" ]; then
+            echo "::warning::$APP_REPO is at v$VERSION but index.html has no '$WIDGET' tile. A new tile needs art and a pitch, so add it by hand."
+            exit 0
+          fi
+          newest=$(printf '%s\n%s\n' "$current" "$VERSION" | sort -V | tail -1)
+          if [ "$current" = "$VERSION" ] || [ "$newest" = "$current" ]; then
+            echo "Site already shows v$current (app is v$VERSION). Nothing to do."
+            exit 0
+          fi
+
+          python3 - <<'EOF'
+          import os, re
+          w, v = os.environ["WIDGET"], os.environ["VERSION"]
+          html = open("index.html").read()
+          tile = re.search(r'<a class="app-widget ' + re.escape(w) + r'".*?</a>', html, re.S)
+          new_tile = re.sub(r'(<span class="app-version">\[ v)[\d.]+( \]</span>)', r'\g<1>' + v + r'\2', tile.group(0), count=1)
+          open("index.html", "w").write(html[:tile.start()] + new_tile + html[tile.end():])
+          EOF
+
+          branch="claude/release-$WIDGET"
+          name=$(sed -n "s/.*<a class=\"app-widget $WIDGET\".*title=\"Open \([^\"]*\)\".*/\1/p" index.html | head -1)
+          title="hub: ${name:-$WIDGET} $VERSION"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -q -B "$branch"
+          git commit -qam "$title"
+          git push -q --force origin "$branch"
+          body="${name:-$WIDGET} moved to **v$VERSION** in $APP_REPO@${APP_SHA:0:7}. **Merge once v$VERSION is live on the App Store**; GitHub Pages publishes on merge.
+
+          Opened by \`.github/workflows/release-badge.yml\` (called from $APP_REPO on a version bump)."
+          if pr=$(gh pr list --head "$branch" --json url --jq '.[0].url') && [ -n "$pr" ]; then
+            gh pr edit "$pr" --title "$title" --body "$body"
+            echo "Updated $pr"
+          else
+            gh pr create --head "$branch" --title "$title" --body "$body"
+          fi
