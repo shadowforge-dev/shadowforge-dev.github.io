@@ -16,7 +16,7 @@
 #     (the app), so this reads the app's own MARKETING_VERSION.
 #   - The app's built-in token can't write to this repo, so the caller passes PORTFOLIO_TOKEN:
 #     a fine-grained token that can only edit this one repo (contents + pull requests).
-#   - The PR waits for Parker: the badge should change when Apple releases the version,
+#   - The PR opens as a DRAFT so it can't be merged by accident: the badge should change when Apple releases the version,
 #     not when the bump merges.
 on:
   workflow_call:
@@ -98,12 +98,12 @@ jobs:
           git checkout -q -B "$branch"
           git commit -qam "$title"
           git push -q --force origin "$branch"
-          body="${name:-$WIDGET} moved to **v$VERSION** in $APP_REPO@${APP_SHA:0:7}. **Merge once v$VERSION is live on the App Store**; GitHub Pages publishes on merge.
+          body="${name:-$WIDGET} moved to **v$VERSION** in $APP_REPO@${APP_SHA:0:7}. **Draft until v$VERSION is live on the App Store**: then mark it ready and merge. GitHub Pages publishes on merge.
 
           Opened by \`.github/workflows/release-badge.yml\` (called from $APP_REPO on a version bump)."
           if pr=$(gh pr list --head "$branch" --json url --jq '.[0].url') && [ -n "$pr" ]; then
             gh pr edit "$pr" --title "$title" --body "$body"
             echo "Updated $pr"
           else
-            gh pr create --head "$branch" --title "$title" --body "$body"
+            gh pr create --draft --head "$branch" --title "$title" --body "$body"
           fi
