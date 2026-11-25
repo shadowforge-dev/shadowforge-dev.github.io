@@ -20,7 +20,7 @@
       deploy that touches those files, hence the -N suffix: two changes on one
       day would otherwise share a token and the second would not be picked up.
    -->
-   <link rel="stylesheet" href="style.css?v=20260824-1">
+   <link rel="stylesheet" href="style.css?v=20261125-1">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
@@ -56,13 +56,13 @@
       </div>
    </div>
 
-   <script src="script.js?v=20260824-1"></script>
+   <script src="script.js?v=20261125-1"></script>
    <script>
       // Initialize random ASCII art
       setRandomAsciiArt();
 
       // Fetch JSON data and stylize
-      fetch('/data.json?v=20260824-1')
+      fetch('/data.json?v=20261125-1')
          .then(response => response.json())
          .then(data => stylizeJSON(data))
          .catch(error => {

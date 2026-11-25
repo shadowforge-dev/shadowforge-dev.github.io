@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Tallystick — Support</title>
-	<link rel="stylesheet" href="/legal.css?v=20260824-1">
+	<link rel="stylesheet" href="/legal.css?v=20261125-1">
 </head>
 
 <body class="accent-tallystick">
@@ -17,12 +17,32 @@
 		</div>
 
 		<h2>Get in touch</h2>
-		<p>Tallystick is made by one person. Email <a href="mailto:hello@shadowforge.dev">hello@shadowforge.dev</a> and you will get a reply from him rather than from a queue.</p>
+		<p>Tallystick is made by one person, and this form reaches them directly, not a queue. The same messages arrive from Settings → Support → Send feedback in the app. Leave an email if you'd like a reply.</p>
 		<p>Useful things to include: what game you were playing, what you expected to happen, and what happened instead. If a score came out wrong, the round it happened on helps a great deal.</p>
+		<form class="hearth-form" data-app="tallystick">
+			<div>
+				<label for="fb-category">What kind of message?</label>
+				<select id="fb-category" name="category" required>
+					<option value="bug">Something isn't working</option>
+					<option value="feature">A game to add, or an idea</option>
+					<option value="general">A question or a note</option>
+				</select>
+			</div>
+			<div>
+				<label for="fb-message">Message</label>
+				<textarea id="fb-message" name="message" maxlength="2000" required></textarea>
+			</div>
+			<div>
+				<label for="fb-email">Email (optional, for a reply)</label>
+				<input type="email" id="fb-email" name="contactEmail" autocomplete="email">
+			</div>
+			<button type="submit">Send</button>
+			<div class="form-status" role="status" aria-live="polite"></div>
+		</form>
 
 		<h2>My game isn't in the list</h2>
 		<p>Search first — several games ship under a neutral name and answer to the one on the box. Typing "phase 10", "farkle" or "skyjo" will find them.</p>
-		<p>If it genuinely is not there, you can build it yourself: search for its name, and the empty result offers to make a game called that. Set how long it runs, whether high or low wins, and whether scores can go below zero. Or email and ask.</p>
+		<p>If it genuinely is not there, you can build it yourself: search for its name, and the empty result offers to make a game called that. Set how long it runs, whether high or low wins, and whether scores can go below zero. Or ask using the form above.</p>
 
 		<h2>We play it differently</h2>
 		<p>Most games ship with variants — Cribbage to 61, Golf over eighteen, Rummy to 300. Open a game's ⓘ and look under versions. You can also change tonight's target on the setup sheet without saving anything, or write down your house rules as a version of your own.</p>
@@ -44,6 +64,7 @@
 			<div class="forge-mark">ShadowForge LLC</div>
 		</div>
 	</div>
+	<script src="/feedback.js"></script>
 </body>
 
 </html>
