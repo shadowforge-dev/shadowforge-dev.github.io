@@ -238,6 +238,24 @@ pre {
 }
 
 /*
+ * The one-line pitch. It sits after the cursor in the markup (so a release
+ * badge PR, which edits the version line, never touches the same lines) but
+ * shows under the name. It wraps inside the widget rather than widening it, so
+ * the row still fits on one line.
+ */
+.app-icon,
+.app-label { order: -2; }
+.app-pitch {
+	order: -1;
+	max-width: 15ch;
+	color: #777;
+	font-family: monospace;
+	font-size: clamp(8px, 0.9vw, 12px);
+	line-height: 1.3;
+	text-align: center;
+}
+
+/*
  * The menu cursor. It always occupies its line so that hovering one widget
  * never nudges the row; only its visibility changes. steps(1) makes it snap
  * on and off the way a game menu does, rather than fading.
