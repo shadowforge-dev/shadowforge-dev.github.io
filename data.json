@@ -8,6 +8,7 @@
 	},
 	"sites": {
 		"questForFoodUrl": "https://questfor.food",
-		"plaintextCardsUrl": "https://plaintext.cards"
+		"plaintextCardsUrl": "https://plaintext.cards",
+		"pocketGuideUrl": "https://pocketguide.cards"
 	}
 }
