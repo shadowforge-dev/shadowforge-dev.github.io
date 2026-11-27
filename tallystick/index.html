@@ -1,89 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Tallystick — the scorepad that knows what you're playing</title>
-	<meta name="description" content="A scorekeeping app for card and dice games on iPhone. Thirty games, each with its own scoring built in. No account, no subscription, no ads.">
-	<!-- Safari shows an "Open in the App Store" banner on iPhone -->
-	<meta name="apple-itunes-app" content="app-id=6800026140">
-	<meta property="og:title" content="Tallystick — the scorepad that knows what you're playing">
-	<meta property="og:description" content="A scorekeeping app for card and dice games on iPhone. Thirty games, each with its own scoring built in. No account, no subscription, no ads.">
-	<meta property="og:url" content="https://shadowforge.dev/tallystick/">
-	<meta property="og:image" content="https://shadowforge.dev/tallystick/tallystick-icon.png">
-	<meta name="twitter:card" content="summary">
-	<link rel="apple-touch-icon" href="/tallystick/tallystick-icon.png">
-	<link rel="stylesheet" href="/legal.css?v=20260824-1">
-	<link rel="icon" href="/tallystick/tallystick-icon.png">
-	<style>
-		.app-icon {
-			width: 128px;
-			height: 128px;
-			display: block;
-			margin: 0 auto 24px;
-			border-radius: 24px;
-			image-rendering: pixelated;
-		}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tallystick — the scorepad that knows what you're playing</title>
+    <meta name="description" content="A scorekeeping app for card and dice games on iPhone. Thirty games, each with its own scoring built in. No account, no subscription, no ads.">
 
-		.legal-header {
-			text-align: center;
-		}
+    <!-- Safari shows an "Open in the App Store" banner on iPhone -->
+    <meta name="apple-itunes-app" content="app-id=6800026140">
 
-		.legal-nav {
-			text-align: left;
-		}
+    <meta property="og:title" content="Tallystick — the scorepad that knows what you're playing">
+    <meta property="og:description" content="A scorekeeping app for card and dice games on iPhone. Thirty games, each with its own scoring built in. No account, no subscription, no ads.">
+    <meta property="og:url" content="https://shadowforge.dev/tallystick/">
+    <meta property="og:image" content="https://shadowforge.dev/tallystick/og.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
 
-		.tagline {
-			color: #c0c0c0;
-			margin-bottom: 28px;
-		}
+    <link rel="canonical" href="https://shadowforge.dev/tallystick/">
+    <meta name="theme-color" content="#0B140D">
+    <link rel="apple-touch-icon" href="/tallystick/tallystick-icon-180.png">
+    <link rel="icon" type="image/png" href="/tallystick/tallystick-icon-180.png">
 
-		.game-list {
-			color: #8a8a8a;
-			font-size: 0.9em;
-			line-height: 2;
-		}
-	</style>
+    <!-- The shared ShadowForge app-site template; the colours below make it Tallystick's. -->
+    <link rel="stylesheet" href="/shared/site.css?v=20261126-1">
+    <style>
+        :root {
+            --bg-deep:    #0B140D;
+            --bg-card:    #142219;
+            --bg-surface: #0F1A12;
+            --border:     #2A3F30;
+            --text:       #E3EFE6;
+            --text-dim:   #8FA898;
+            --accent:     #4FBF87;
+            --accent-glow:#6FD9A4;
+        }
+
+        /* Tallystick only: the opening argument and the game list. */
+        .lead {
+            max-width: 560px;
+            margin: 0 auto;
+            text-align: center;
+            color: var(--text-dim);
+        }
+        .games { margin-top: 28px; }
+        .games-note { margin: 24px 0 0; }
+        .games .chip { font-family: system-ui, -apple-system, sans-serif; font-size: 0.8rem; letter-spacing: 0; }
+    </style>
 </head>
+<body>
 
-<body class="accent-tallystick">
-	<div class="legal-container">
-		<div class="legal-header">
-			<div class="legal-nav"><a href="/">← ShadowForge</a></div>
-			<img class="app-icon" src="/tallystick/tallystick-icon.png" alt="Tallystick">
-			<h1 class="legal-title">Tallystick</h1>
-			<div class="legal-subtitle">The scorepad that knows what you're playing</div>
-			<p><a href="https://apps.apple.com/app/id6800026140">Download on the App Store</a> · iPhone</p>
-		</div>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <img src="/tallystick/tallystick-icon-180.png" alt="Tallystick app icon" class="hero-icon" width="96" height="96">
+            <h1>Tallystick</h1>
+            <p class="tagline">The scorepad that knows what you're playing</p>
+            <p class="platforms">iPhone</p>
 
-		<p class="tagline">Most scorekeeping apps are a grid of empty boxes. Tallystick knows that Cribbage stops at 121, that Hearts ends on a high score but is won on a low one, and that in Phases you win by finishing the ladder rather than by the points. Pick a game and it already knows how it's scored.</p>
+            <a class="store-button" href="https://apps.apple.com/app/id6800026140">Download on the App Store</a>
 
-		<h2>Thirty games</h2>
-		<p class="game-list">Cribbage · Hearts · Spades · Euchre · Bid Whist · Pinochle · Pitch · Rummy · Gin · Canasta · Contract Rummy · Hand &amp; Foot · Golf · Last Card · Stockpile · Pounce · Crows · Mexican Train · Dominoes · Tile Rummy · Crowns · Phases · Rolling Sixes · Trickster · Low Twelve · Letters · Sushi Belt · Rails · Wonders · Aviary</p>
-		<p>Search by the name on the box and you'll find it, whatever we had to call it. If yours isn't there, make it — the empty search result offers to.</p>
+            <div class="stats-bar">
+                <div class="stat">
+                    <span class="stat-value">30</span>
+                    <span class="stat-label">Games</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">0</span>
+                    <span class="stat-label">Accounts</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">0</span>
+                    <span class="stat-label">Ads</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-		<h2>Fix a score from three rounds ago</h2>
-		<p>Every number you've entered stays on screen and stays tappable. Tap it, change it, and every total re-adds itself, including who's winning. Finishing a game isn't a one-way door either.</p>
+    <!-- THE GAMES -->
+    <section>
+        <div class="container">
+            <h2>Thirty Games</h2>
+            <p class="lead">Most scorekeeping apps are a grid of empty boxes. Tallystick knows that Cribbage stops at 121, that Hearts ends on a high score but is won on a low one, and that in Phases you win by finishing the ladder rather than by the points. Pick a game and it already knows how it's scored.</p>
+            <div class="chips games">
+                <span class="chip">Cribbage</span>
+                <span class="chip">Hearts</span>
+                <span class="chip">Spades</span>
+                <span class="chip">Euchre</span>
+                <span class="chip">Bid Whist</span>
+                <span class="chip">Pinochle</span>
+                <span class="chip">Pitch</span>
+                <span class="chip">Rummy</span>
+                <span class="chip">Gin</span>
+                <span class="chip">Canasta</span>
+                <span class="chip">Contract Rummy</span>
+                <span class="chip">Hand &amp; Foot</span>
+                <span class="chip">Golf</span>
+                <span class="chip">Last Card</span>
+                <span class="chip">Stockpile</span>
+                <span class="chip">Pounce</span>
+                <span class="chip">Crows</span>
+                <span class="chip">Mexican Train</span>
+                <span class="chip">Dominoes</span>
+                <span class="chip">Tile Rummy</span>
+                <span class="chip">Crowns</span>
+                <span class="chip">Phases</span>
+                <span class="chip">Rolling Sixes</span>
+                <span class="chip">Trickster</span>
+                <span class="chip">Low Twelve</span>
+                <span class="chip">Letters</span>
+                <span class="chip">Sushi Belt</span>
+                <span class="chip">Rails</span>
+                <span class="chip">Wonders</span>
+                <span class="chip">Aviary</span>
+            </div>
+            <p class="section-note games-note">Search by the name on the box and you'll find it, whatever we had to call it. If yours isn't there, make it: the empty search result offers to.</p>
+        </div>
+    </section>
 
-		<h2>Built for a table, not a spreadsheet</h2>
-		<p>Big keys, one-tap values for the scores that come up constantly, and a plus key so you can enter 10+10+5 without doing it in your head. The screen stays awake while you play, so the phone can sit on the table between rounds. Nobody fills in a form before they can score — names are editable at the table, and changing one carries every score with it.</p>
+    <!-- FEATURES -->
+    <section>
+        <div class="container">
+            <h2>Features</h2>
+            <p class="section-note">Built for a card table, not a spreadsheet</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Fix Any Round</h3>
+                    <p>Every number you've entered stays on screen and stays tappable. Change a score from three rounds ago and every total re-adds itself, including who's winning.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>A Keypad for the Table</h3>
+                    <p>Big keys, one-tap values for the scores that come up constantly, and a plus key for 10+10+5. The screen stays awake between rounds.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>No Forms First</h3>
+                    <p>Tap a game and start scoring. Rename players at the table, swap someone in mid-game, and follow whose deal it is.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>When It Ends</h3>
+                    <p>Final standings and a few honest lines about how it went: the margin, a standout round, a comeback. Share a picture of it with the table, free.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>The Record<span class="pro-tag">PRO</span></h3>
+                    <p>Finished games kept, with win rates, head-to-head records, and evenings gathered together. Several games on the go at once.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Yours, on Your Phone</h3>
+                    <p>No account, no sign-in, and no network requests at all. Export the whole record to a file and restore it on another phone.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-		<h2>What's free</h2>
-		<p>Every game in the catalogue. Any number of players. Correcting any round. Portrait and landscape. However many games you play. These aren't a trial.</p>
+    <!-- SCREENSHOTS -->
+    <section class="screenshots">
+        <div class="container">
+            <h2>Screenshots</h2>
+            <div class="screenshot-row">
+                <div class="screenshot-slot"><img src="/tallystick/screenshots/1.webp" alt="It knows the game you're playing: a Crowns board, round 2 of 11" width="221" height="480" loading="lazy"></div>
+                <div class="screenshot-slot"><img src="/tallystick/screenshots/2.webp" alt="Fix a score from three rounds ago" width="221" height="480" loading="lazy"></div>
+                <div class="screenshot-slot"><img src="/tallystick/screenshots/3.webp" alt="The same four, every Friday: saved players" width="221" height="480" loading="lazy"></div>
+                <div class="screenshot-slot"><img src="/tallystick/screenshots/4.webp" alt="One game at the cabin, one at the kitchen table: two games in progress" width="221" height="480" loading="lazy"></div>
+                <div class="screenshot-slot"><img src="/tallystick/screenshots/5.webp" alt="It remembers who wins: stats" width="221" height="480" loading="lazy"></div>
+                <div class="screenshot-slot"><img src="/tallystick/screenshots/6.webp" alt="Somebody has to be told they lost: the game summary" width="221" height="480" loading="lazy"></div>
+                <div class="screenshot-slot"><img src="/tallystick/screenshots/7.webp" alt="Or make it look like something else: a colour theme" width="221" height="480" loading="lazy"></div>
+            </div>
+        </div>
+    </section>
 
-		<h2>What Pro adds</h2>
-		<p>Pro keeps the history: several games on the go at once, finished games kept with win rates and head-to-head records, evenings gathered together, versions of games played your way, and colour throughout. One payment. It never expires, it isn't a subscription, and there are no adverts anywhere in the app.</p>
+    <!-- PRICING -->
+    <section class="pricing">
+        <div class="container">
+            <h2>Choose Your Path</h2>
+            <p class="section-note">One payment. It never expires, it isn't a subscription, and there are no ads anywhere.</p>
+            <div class="tier-grid">
+                <div class="tier tier-free">
+                    <div class="tier-name">Free</div>
+                    <div class="tier-price">$0<small>forever</small></div>
+                    <ul>
+                        <li>Every game in the catalogue</li>
+                        <li>Any number of players</li>
+                        <li>Correcting any round</li>
+                        <li>Portrait and landscape</li>
+                        <li>As many games as you play</li>
+                        <li>Make your own games</li>
+                        <li>Share the final standings</li>
+                    </ul>
+                </div>
+                <div class="tier tier-pro featured">
+                    <div class="tier-name">Pro</div>
+                    <div class="tier-price">$4.99<small>one-time</small></div>
+                    <ul>
+                        <li>Everything in Free</li>
+                        <li>Several games at once</li>
+                        <li>The record: finished games, win rates, head to head</li>
+                        <li>Play it your way: Cribbage to 61, Golf over eighteen</li>
+                        <li>Six colour themes</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="pricing-footnote">There's also a tip jar ($1.99 or $9.99). It's entirely optional and unlocks nothing.</p>
+        </div>
+    </section>
 
-		<h2>Your record is yours</h2>
-		<p>Everything is stored on your device. No account, no sign-in, nothing sent anywhere — Tallystick makes no network requests at all. Export the whole record to a file whenever you like, and restore it on another phone.</p>
+    <!-- FEEDBACK (Hearth, through this site's worker; see /_worker.js) -->
+    <section class="feedback">
+        <div class="container">
+            <button class="feedback-toggle" id="feedback-toggle" aria-expanded="false" aria-controls="feedback-body">
+                <img src="/tallystick/tallystick-icon-180.png" alt="" class="scroll-icon">
+                <span class="scroll-text">Bug report, a game we're missing, or just want to say hi?</span>
+            </button>
 
-		<div class="legal-footer">
-			<a href="/tallystick/support/">Support</a> ·
-			<a href="/tallystick/privacy/">Privacy Policy</a>
-			<div class="forge-mark">ShadowForge LLC</div>
-		</div>
-	</div>
+            <div class="feedback-body" id="feedback-body">
+                <form class="feedback-form hearth-form" data-app="tallystick">
+                    <div class="form-group">
+                        <label for="fb-category">Category</label>
+                        <select id="fb-category" name="category" required>
+                            <option value="general">General</option>
+                            <option value="bug">Bug Report</option>
+                            <option value="feature">Feature Request</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fb-message">Message</label>
+                        <textarea id="fb-message" name="message" maxlength="2000" placeholder="What's on your mind?" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="fb-email">Email <span class="optional">(optional, for a reply)</span></label>
+                        <input type="email" id="fb-email" name="contactEmail" autocomplete="email" placeholder="you@example.com">
+                    </div>
+                    <button type="submit" class="submit-btn">Send Feedback</button>
+                    <div class="form-status" role="status" aria-live="polite"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER: the same on every ShadowForge app site (shadowforge.dev/shared/site.css); "More from" lists the other apps -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-cta">
+                <a class="store-button" href="https://apps.apple.com/app/id6800026140">Download on the App Store</a>
+            </div>
+            <nav class="footer-links">
+                <a href="/tallystick/support/">Support</a>
+                <a href="/tallystick/privacy/">Privacy Policy</a>
+                <a href="/terms/">Terms of Use</a>
+            </nav>
+            <div class="more-from">
+                <h2>More from ShadowForge</h2>
+                <div class="more-apps">
+                    <a href="https://psydex.cards"><img src="https://shadowforge.dev/shared/icons/psydex.webp" alt="" width="40" height="40"><span><strong>Psydex</strong><small>Pokémon card database</small></span></a>
+                    <a href="https://quiverbooks.app"><img src="https://shadowforge.dev/shared/icons/quiverbooks.webp" alt="" width="40" height="40"><span><strong>QuiverBooks</strong><small>E-reader for every format</small></span></a>
+                    <a href="https://oldgold.shadowforge.dev"><img src="https://shadowforge.dev/shared/icons/oldgold.webp" alt="" width="40" height="40"><span><strong>Old Gold Classic</strong><small>old.reddit, refined, in Safari</small></span></a>
+                </div>
+            </div>
+            <p class="footer-credit">&copy; 2026 <a href="https://shadowforge.dev">ShadowForge LLC</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('feedback-toggle').addEventListener('click', function () {
+            var open = document.getElementById('feedback-body').classList.toggle('open');
+            this.setAttribute('aria-expanded', open);
+        });
+    </script>
+    <script src="/feedback.js?v=20261126-1"></script>
+
 </body>
-
 </html>
